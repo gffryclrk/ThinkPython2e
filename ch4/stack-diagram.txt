@@ -1,0 +1,17 @@
+__main__ | bob -> turtle
+
+__circle__ | t -> bob
+	   | r -> radius
+
+__arc__ | t -> bob 
+	| r -> radius
+	| angle -> 360
+	| arc_length -> 2 * math.pi * radius * angle / 360
+	| n -> (arc_length / 3) + 1
+	| step_length -> arc_length / n
+	| step_angle -> angle / n
+
+__polyline__ | t -> bob
+	     | n -> (arc_length / 3) + 1
+	     | length -> arc_length / n
+	     | angle / n 
