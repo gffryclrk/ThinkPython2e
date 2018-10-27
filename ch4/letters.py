@@ -57,7 +57,8 @@ def draw_b(t, height):
     # t.rt(180)
     # t.forward(cb_ratio*height*0.90)
     # t.pd()
-    t.forward(cb_ratio * height * 0.2)
+    # t.forward(cb_ratio * height * 0.2)
+
     t.rt(180)
     exercises.arc(t, curve_radius, 180)
     t.forward(cb_ratio * height)

@@ -31,7 +31,10 @@ def arc(t, r, angle):
     n = int(arc_length / 3) + 1
     step_length = arc_length / n
     step_angle = float(angle) / n
+
+    t.lt(step_angle/2)
     polyline(t, n, step_length, step_angle)
+    t.rt(step_angle/2)
 
 def circle(t, r):
     arc(t, r, 360)
