@@ -70,13 +70,41 @@ def draw_b(t, height):
     t.forward(cb_ratio * height + curve_radius)
     t.pd()
 
+def draw_c(t, height):
+    # exercises.arc(t, height/2, 360*0.7)
+    c_ratio = 0.8
+    R = height / 2
+    circumference = math.pi * 2 * R
+    s = (1 - c_ratio) * 2 * math.pi * R
+    theta = s / R
+    r = R * math.cos(theta / 2)
+    a = 2 * R * math.sin( theta / 2)
+    yd = (height - a) / 2
 
+    t.pu()
+    t.forward(R)
+    t.pd()
+    exercises.arc(t, R, (1 - c_ratio) * 0.5 *360) 
+    t.pu()
+    exercises.arc(t, R, 180 -  (1 - c_ratio) *360)
+    t.pd()
+    exercises.arc(t, R, (1 - c_ratio) * 0.5 *360) 
+    exercises.arc(t, R, 0.5 * 360)
+    t.pu()
+    t.forward(R)
+    t.pd()
 
+    # t.pu()
+    # t.forward(R + r)
+    # t.lt(90)
+    # t.forward(yd + a)
+    # t.lt(60)
+    # t.pd()
 
+    # exercises.arc(t, height/2, 2 * math.pi * R * c_ratio)
+    # t.setheading(270)
+    # t.pu()
+    # t.forward(yd)
+    # t.lt(90)
+    # t.forward(R - r)
     
-
-
-
-
-
-
