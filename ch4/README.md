@@ -15,4 +15,4 @@ This was a fun exercise. My solution perhaps isn't the most efficient but I'm no
 ### Exercise 4: Letters
 Constructing letters was fun but time consuming. I created A, B & C and decided that was probably enough for now. I'm sure that most of the rest of the capital letters can be constructed using a similar methodology. 
 
-![ACCB](img/turtle_letter.png?raw=true "A B C")
+![ACCB](img/turtle_letters.png?raw=true "A B C")
