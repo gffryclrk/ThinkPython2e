@@ -13,6 +13,11 @@ This was a fun exercise. My solution perhaps isn't the most efficient but I'm no
 ![11 Slice Pie](img/pie_11.png?raw=true "11 Slice Pie")
 
 ### Exercise 4: Letters
-Constructing letters was fun but time consuming. I created A, B & C and decided that was probably enough for now. I'm sure that most of the rest of the capital letters can be constructed using a similar methodology. 
+Constructing letters was fun but time consuming. I created A, B & C and decided that was probably enough for now. I'm sure that the majority of remaining capital letters can be constructed using a similar methodology. 
 
-![ACCB](img/turtle_letters.png?raw=true "A B C")
+![ACCB](img/turtle_letters.png?raw=true "ACCB")
+
+### Exercise 4: Spiral
+I made the spiral without too much difficulty. I'm sure it could be tweaked further but I think it's time to move on from these turtle exercises for the time being, however fun. One thing I wasn't able to accomplish was the length parameter: it does set an upper limit on the spiral length but in a less predictable way than arc length in pixels which is what I originally wanted. However, I decided to move on for now. This exercise was interesting and enjoyable.
+
+![Archimedean Spiral](img/Spiral.png?raw=true "Archimedean Spiral")
