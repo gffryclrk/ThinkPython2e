@@ -1,0 +1,18 @@
+def print_n(s, n):
+	if n <= 0:
+		return
+	print(s)
+	print_n(s, n-1)
+
+# As an exercise, draw a stack diagram for print_n called with s = 'Hello' and n=2. Then write a function called do_n that takes afunction object and anumber, n, as arguments, and that calls the given function n times.
+
+__main__ 	
+print_n		s -> 'Hello'
+		n -> 2
+
+print_n 	s -> 'Hello'
+		n -> 1
+
+print_n 	s -> 'Hello'
+		n -> 0
+
