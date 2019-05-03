@@ -26,5 +26,26 @@ def snowflake(t, length):
         koch(t, length)
         t.rt( 360 / 3)
 
-snowflake(t, 125)
+def minkowski_sausage(t, length):
+    if length < 4:
+        t.fd(length)
+        return
+
+    minkowski_sausage(t, length / 4)
+    t.lt(90)
+    minkowski_sausage(t, length / 4)
+    t.rt(90)
+    minkowski_sausage(t, length / 4)
+    t.rt(90)
+    minkowski_sausage(t, length / 4)
+    minkowski_sausage(t, length / 4)
+    t.lt(90)
+    minkowski_sausage(t, length / 4)
+    t.lt(90)
+    minkowski_sausage(t, length / 4)
+    t.rt(90)
+    minkowski_sausage(t, length / 4)
+
+# snowflake(t, 125)
+minkowski_sausage(t, 525)
 turtle.exitonclick()
