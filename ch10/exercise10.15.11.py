@@ -23,5 +23,4 @@ for line in open("../ch9/words.txt"):
 for word in words:
     if search.in_bisect(words, word[::-1]): pairs.append(word)
 
-print(pairs)
-
+print(pairs, "\n", "{} words found".format(len(pairs)))
