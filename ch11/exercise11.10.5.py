@@ -16,8 +16,11 @@ def rotate_pairs(word_list):
                 pairs.append( (word, rotated, i) )
     return pairs
 
-word_list = []
+word_list = {}
 for line in open("../ch9/words.txt"):
-    word_list.append(line)
+    word_list[line.rstrip()] = ''
 
-print(rotate_pairs(word_list))
+pairs = rotate_pairs(word_list)
+
+print("Found {} pairs!".format(len(pairs)))
+print(pairs)
