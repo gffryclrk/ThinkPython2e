@@ -7,7 +7,7 @@ If you did Exercise 10, you can compare the speed of this implementation with th
 """
 
 ## https://www.peterbe.com/plog/how-to-do-performance-micro-benchmarks-in-python
-
+sys.path.append('../ch10')
 # import pandas as pd
 # import numpy as np
 import search
