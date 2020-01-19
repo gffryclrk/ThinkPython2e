@@ -39,6 +39,7 @@ for line in open("ch9/words.txt"):
 print("Found {} anagrams".format(len(dict)))
 print("Anagrams for {}: {}".format("deltas", dict[tuple(sorted("deltas"))]))
 
+# 2. Longest Anagrams:
 print("Printing top 100 longest anagrams... ")
 
 # This one stumped me for a bit...
@@ -47,5 +48,14 @@ sorted_anagram_lengths = [key for (key, value) in sorted(lengths.items(), key=la
 
 for index, combo in zip(range(100), sorted_anagram_lengths):
    print("Length {}: {}".format(len(dict[combo]), dict[combo]))
+
+   if len(dict[combo][0]) == 8: print("Combo of length 8: {}".format(combo))
+
+# 3.
+# Originally I was going to subset the word list dict..
+# However on second thought I decided to simply look at the above loop of ordered letter combo anagram counts for the combo with the most number of anagrams. That combo is ('a', 'e', 'g', 'i', 'n', 'r', 's', 't')
+
+# eight_letter_combos = { k:v for k, v in dict.items() if len(k) == 8 }
+
 
 
