@@ -34,19 +34,25 @@ for line in open('ch9/words.txt'):
 
 # Add I, a and the empty string
 word_list[''] = {}
-word_list['I'] = {}
+word_list['i'] = {} # inserting I lowercase to avoid having to lowercase all words or letters
 word_list['a'] = {}
 
 def check_word(word, children):
-    for i in range(1, len(word)):
+    """
+    This function recursively looks up a word, given as a param, and then drops one letter at a time and calls itself
+    So far it seems to work:
+    {'spite': {'site': {'sit': {'it': {'i': {'': {}}}, 'si': {'i': {'': {}}}}}, 'spit': {'pit': {'it': {'i': {'': {}}}, 'pi': {'i': {'': {}}}}, 'sit': {'it': {'i': {'': {}}}, 'si': {'i': {'': {}}}}}}, 'sprit': {'spit': {'pit': {'it': {'i': {'': {}}}, 'pi': {'i': {'': {}}}}, 'sit': {'it': {'i': {'': {}}}, 'si': {'i': {'': {}}}}}}}
+    """
+
+    for i in range(1, len(word) + 1):
         word_less_letter = f'{word[0:i-1]}{word[0+i:len(word)]}'
         if word_less_letter in word_list:
-            pdb.set_trace()
-            if word_less_letter is not in children: children[word_less_letter] = {}
-            check_word(word_less_letter, children)
+#           pdb.set_trace()
+            if word_less_letter not in children: children[word_less_letter] = {}
+            check_word(word_less_letter, children[word_less_letter])
     
 
 for word in word_list:
     check_word(word, word_list[word])
 
-
+pdb.set_trace()
