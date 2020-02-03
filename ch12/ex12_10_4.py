@@ -55,4 +55,28 @@ def check_word(word, children):
 for word in word_list:
     check_word(word, word_list[word])
 
+def dict_depth(my_dict):
+    """
+    This function, lifted from https://www.geeksforgeeks.org/python-check-if-dictionary-is-empty/
+    returns the depth of a dictionary
+    """
+
+    if isinstance(my_dict, dict):
+
+        return 1 + (max(map(dict_depth, my_dict.values())) if my_dict else 0)
+
+    return 0
+
+
+depths = {}
+for key in word_list.keys():
+    depth = dict_depth(word_list[key])
+    words_of_depth = depths.get(depth, [])
+    words_of_depth.append(key)
+    depths[depth] = words_of_depth
+
+
+print("Longest words with length {}: {}".format(max(depths.keys()), depths[max(depths.keys())]))
+# Longest words with length 12: ['complecting']
+
 pdb.set_trace()
