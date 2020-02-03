@@ -26,7 +26,6 @@ Solution: http://thinkpython2.com/code/reducible.py.
 """
 import itertools
 import pdb
-
 word_list = {}
 for line in open('ch9/words.txt'):
     word = line.strip()
@@ -47,7 +46,6 @@ def check_word(word, children):
     for i in range(1, len(word) + 1):
         word_less_letter = f'{word[0:i-1]}{word[0+i:len(word)]}'
         if word_less_letter in word_list:
-#           pdb.set_trace()
             if word_less_letter not in children: children[word_less_letter] = {}
             check_word(word_less_letter, children[word_less_letter])
     
@@ -78,5 +76,3 @@ for key in word_list.keys():
 
 print("Longest words with length {}: {}".format(max(depths.keys()), depths[max(depths.keys())]))
 # Longest words with length 12: ['complecting']
-
-pdb.set_trace()
