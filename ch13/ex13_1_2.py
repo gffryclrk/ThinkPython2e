@@ -27,7 +27,7 @@ def word_count_dict(word_gen):
     return wc_dict
 
 if __name__ == '__main__':
-    # Of the 3 books compared, Sir Arthur Conan Doyle uses the most amount of words (by quite a large
+    # Of the 3 books compared, James Joyce (Ulysses) uses the most amount of words (by quite a large margin)
     
     word_gen = wg.read_file('text/sherlock_1661-0.txt', skiplines=32)
     sherlock_counts = word_count_dict(word_gen)
@@ -49,4 +49,9 @@ if __name__ == '__main__':
     print("{} unique words found in Beowulf".format(len(beowulf_counts)))
     # 7612 unique words found in Beowulf
 
-    
+    ulysses_counts = word_count_dict(
+        wg.read_file('text/ulysses_4300-0.txt', skiplines=32)
+    )
+
+    print("{} unique words found in Ulysses".format(len(ulysses_counts)))
+    # 30933 unique words found in Ulysses
