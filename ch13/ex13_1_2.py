@@ -27,8 +27,26 @@ def word_count_dict(word_gen):
     return wc_dict
 
 if __name__ == '__main__':
-
+    # Of the 3 books compared, Sir Arthur Conan Doyle uses the most amount of words (by quite a large
+    
     word_gen = wg.read_file('text/sherlock_1661-0.txt', skiplines=32)
-    counts = word_count_dict(word_gen)
+    sherlock_counts = word_count_dict(word_gen)
 
-    print("{} unique words found".format(len(counts)))
+    print("{} unique words found in Sherlock".format(len(sherlock_counts)))
+    # 10397 unique words found in Sherlock
+    
+    plato_counts = word_count_dict(
+        wg.read_file('text/ion_pg1635.txt', skiplines=31)
+    )
+
+    print("{} unique words found in Plato's ION".format(len(plato_counts)))
+    # 1761 unique words found in Plato's ION
+    
+    beowulf_counts = word_count_dict(
+        wg.read_file('text/beowulf_pg16328.txt', skiplines=33)
+    )
+
+    print("{} unique words found in Beowulf".format(len(beowulf_counts)))
+    # 7612 unique words found in Beowulf
+
+    
