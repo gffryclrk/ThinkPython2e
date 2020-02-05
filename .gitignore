@@ -3,3 +3,5 @@
 __pycache__
 ch11/search/*
 *.py~
+ENV/*
+env3/*
