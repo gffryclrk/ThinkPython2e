@@ -9,4 +9,5 @@ def histogram(s):
 
     return d
 
-print(histogram('brontosaurus'))
+if __name__ == "__main__":
+    print(histogram('brontosaurus'))
