@@ -7,5 +7,7 @@ def cumsum(t):
 
     return cumsum
 
-t = [1, 2, 3]
-print(cumsum(t))
+
+if __name__ == '__main__':
+    t = [1, 2, 3]
+    print(cumsum(t))
