@@ -90,18 +90,32 @@ if __name__ == '__main__':
     for k in zip(range(10), sorted_emma_counts.keys()):
         print(f'{k}')
 
+    print("sorted emma counts:")
     sorted_emma_counts_list = sort_hist_to_list(emma_counts)
 
     for t in zip(range(10), sorted_emma_counts_list):
         print(t)
 
-    sorted_emma_cumsum = cumsum([x[1] for x in sorted_emma_counts_list])
+    emma_frequency_list = [x[1] for x in sorted_emma_counts_list]
+    sorted_emma_cumsum = cumsum(emma_frequency_list)
 
     assert sum(emma_counts.values()) == sorted_emma_cumsum[-1]
 
-    rand_n = random.randint(0, sorted_emma_cumsum[-1])
-    rand_word = sorted_emma_counts_list[bisect_index_search(sorted_emma_cumsum, rand_n)][0]
+#    print(f'random word found: {rand_word}')
 
-    print(f'random word found: {rand_word}')
+    sampled_from_distribution = {}
+    for i in range(1, sorted_emma_cumsum[-1]):
+        rand_n = random.randint(0, sorted_emma_cumsum[-1])
+        rand_word = sorted_emma_counts_list[bisect_index_search(sorted_emma_cumsum, rand_n)][0]
 
+        sampled_from_distribution[rand_word] = sampled_from_distribution.get(rand_word, 0) + 1
+
+    sorted_random_sample_list = sort_hist_to_list(sampled_from_distribution)
+    print("sorted randomly generated from emma distribution counts:")
+
+    for t in zip(range(10), sorted_random_sample_list):
+        print(t)
+
+    sample_frenquency_list = [sampled_from_distribution.get(k[0], 0) for k in sorted_emma_counts_list]
     
+        
