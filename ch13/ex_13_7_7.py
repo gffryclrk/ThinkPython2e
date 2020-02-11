@@ -32,47 +32,22 @@ def sort_hist_to_list(word_dict):
     """
     return [(k, v) for k, v in sorted(word_dict.items(), key=lambda item: item[1], reverse=True)]
 
-def bisect_index_search(sorted_list, search_term):
+def binary_search_leftmost(a, n, t):
     """
-    This method takes a sorted list of integers and returns the index
-    of the element if found or what the index would be if inserted found
-
-    I copied most of the implementation from my solution to Chapter 10, exercise 15.10. I would have used it but needed slightly different functionality
+    I wasn't able to get my bisect_index_search() function to work
+    and so discovered this much simpler algorithm on Wikipedia
     """
+    l = 0
+    r = n
+    while l < r:
+        m = (l + r) // 2
+        if a[m] < t:
+            l = m + 1
+        else:
+            r = m
 
-    def bisect(s_list, search, start, stop, steps=0):
-        """
-        This helper function recursively searches the sorted list (s_list
-        """
-
-        if start > stop: return start
-        if start == stop: return start
-        if stop < 0: return 0
-        
-        mid = (start + stop) // 2
-
-
-
-        if s_list[mid] == search: return mid
-
-        if s_list[mid] > search: return bisect(s_list, search, start, mid - 1, steps+1)
-        if s_list[mid] < search: return bisect(s_list, search, mid+1, stop, steps+1)
-
-    return bisect(sorted_list, search_term, 0, len(sorted_list))
-       
-def test_bisect():
-    """
-    Obligatory print lines to test the bisect search I just wrote
-    """
+    return l
     
-    print("should be 2: {}".format(bisect_index_search([1, 5, 10, 20], 10)))
-    print("should be 3: {}".format(bisect_index_search([1, 5, 10, 20], 11)))
-    print("should be 0: {}".format(bisect_index_search([10, 15, 19, 20], 2)))
-    print("should be 0: {}".format(bisect_index_search([10, 15, 19, 20, 25], 2)))
-    print("should be 5: {}".format(bisect_index_search([10, 15, 19, 20, 25], 30)))
-    print("should be 0: {}".format(bisect_index_search([10, 15, 19, 20, 25], 10)))
-    print("should be 4: {}".format(bisect_index_search([10, 15, 19, 20, 25], 25)))
-
 if __name__ == '__main__':
 
     
@@ -106,7 +81,7 @@ if __name__ == '__main__':
     sampled_from_distribution = {}
     for i in range(1, sorted_emma_cumsum[-1]):
         rand_n = random.randint(0, sorted_emma_cumsum[-1])
-        rand_word = sorted_emma_counts_list[bisect_index_search(sorted_emma_cumsum, rand_n)][0]
+        rand_word = sorted_emma_counts_list[binary_search_leftmost(sorted_emma_cumsum, len(sorted_emma_cumsum), rand_n)][0]
 
         sampled_from_distribution[rand_word] = sampled_from_distribution.get(rand_word, 0) + 1
 
