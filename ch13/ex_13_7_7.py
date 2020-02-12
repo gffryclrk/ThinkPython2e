@@ -25,6 +25,7 @@ from cumsum import cumsum
 from ex13_1_3 import sort_counts
 
 import random
+from scipy.stats import chisquare
 
 def sort_hist_to_list(word_dict):
     """
@@ -55,28 +56,17 @@ if __name__ == '__main__':
             wg.read_file('text/emma.txt', skiplines=249)
     )
 
-    sorted_emma_counts = sort_counts(emma_counts)
-
-    for k, v in zip(range(10), sorted_emma_counts.items()):
-        print(f'{k}: {v}')
-
-    # I could use dict.keys() but I'm not sure I want to convert the collection to a list in order to subscript
-    # I'm also not sure how much confidence I have in this ordered dictionary and would like to learn more.
-    for k in zip(range(10), sorted_emma_counts.keys()):
-        print(f'{k}')
-
-    print("sorted emma counts:")
     sorted_emma_counts_list = sort_hist_to_list(emma_counts)
 
+    print("sorted emma counts:")
     for t in zip(range(10), sorted_emma_counts_list):
         print(t)
 
     emma_frequency_list = [x[1] for x in sorted_emma_counts_list]
+    
     sorted_emma_cumsum = cumsum(emma_frequency_list)
 
     assert sum(emma_counts.values()) == sorted_emma_cumsum[-1]
-
-#    print(f'random word found: {rand_word}')
 
     sampled_from_distribution = {}
     for i in range(1, sorted_emma_cumsum[-1]):
@@ -92,5 +82,13 @@ if __name__ == '__main__':
         print(t)
 
     sample_frenquency_list = [sampled_from_distribution.get(k[0], 0) for k in sorted_emma_counts_list]
-    
+
+    """
+    Chisquare test to see if the algorith is working...
+    Usually insufficient evidence
+    """
+    chisq = chisquare(sample_frenquency_list[:10], f_exp=emma_frequency_list[:10])
+    print("H_0: Probabilities of 10 most frequent sampled words are the same as observed")
+    print("H_a: At least one of the probabilities of top 10 sampled words is different")
+    print("Sufficient evidence to reject H_0: {} (p < 0.05)".format(chisq[1] < 0.05))    
         
