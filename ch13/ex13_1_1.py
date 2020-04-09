@@ -37,7 +37,7 @@ def read_file(filename, skiplines=0):
     return word_generator()
 
 if __name__ == "__main__":
-    word_gen = read_file('text/sherlock_1661-0.txt')
+    word_gen = read_file('../text/sherlock_1661-0.txt')
     for a in range(1, 12):
         print("Word {}: {}".format(a, next(word_gen)))
     
