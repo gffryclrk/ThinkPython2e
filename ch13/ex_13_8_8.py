@@ -31,13 +31,16 @@ def read_file(filename, n, skiplines=0):
     Returns a function that returns n word generator from input file. 
     """
 
-#    punct_trans_table = str.maketrans(dict.fromkeys(string.punctuation))
-#    whitespace_trans_table = str.maketrans(dict.fromkeys(string.whitespace))
-
     def word_generator():
         """
         Creates a generator from filename provided to outer function. Skips specified numebr of lines.
+
+        Generator returns a tuple of two elements: 
+        0: Tuple of n words (prefix)
+        1: single word suffix
         """
+        #TODO: Words at end of text won't be returned if number of words in input file divided by n+1 doesn't have a remainder of 0
+        
         wordlist = []
         with open(filename) as f:
             for _ in range(skiplines):
@@ -45,8 +48,9 @@ def read_file(filename, n, skiplines=0):
             for line in f:
                 for word in line.split():
                     wordlist.append(word)
-                    if(len(wordlist) == n):
-                        yield tuple(wordlist)
+                    if(len(wordlist) == n+1):
+                        prefix = tuple(wordlist[:-1])
+                        yield (prefix, wordlist[-1])
                         wordlist = []
 
 
@@ -54,7 +58,7 @@ def read_file(filename, n, skiplines=0):
 
 if __name__ == "__main__":
 
-    word_gen = read_file('../text/emma.txt', n=6, skiplines=249)
+    word_gen = read_file('./text/emma.txt', n=6, skiplines=249)
     for a in range(1, 12):
         print("Word {}: {}".format(a, next(word_gen)))
 
