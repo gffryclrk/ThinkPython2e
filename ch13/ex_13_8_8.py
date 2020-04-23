@@ -25,6 +25,8 @@ First, I want to write an iterator that yeilds n words from a file
 """
 
 import string
+from collections import deque
+import itertools
 
 def read_file(filename, n, skiplines=0):
     """
@@ -41,7 +43,7 @@ def read_file(filename, n, skiplines=0):
         """
         #TODO: Words at end of text won't be returned if number of words in input file divided by n+1 doesn't have a remainder of 0
         
-        wordlist = []
+        wordlist = deque()
         with open(filename) as f:
             for _ in range(skiplines):
                 next(f)
@@ -49,9 +51,9 @@ def read_file(filename, n, skiplines=0):
                 for word in line.split():
                     wordlist.append(word)
                     if(len(wordlist) == n+1):
-                        prefix = tuple(wordlist[:-1])
+                        prefix = tuple(itertools.islice(wordlist, 0, len(wordlist)-1))
                         yield (prefix, wordlist[-1])
-                        wordlist = []
+                        wordlist.popleft()
 
 
     return word_generator()
