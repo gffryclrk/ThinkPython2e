@@ -27,6 +27,7 @@ First, I want to write an iterator that yeilds n words from a file
 import string
 from collections import deque
 import itertools
+import pdb
 
 def read_file(filename, n, skiplines=0):
     """
@@ -58,9 +59,36 @@ def read_file(filename, n, skiplines=0):
 
     return word_generator()
 
+def build_dict():
+    """
+    This method uses the read_file() generator to build a dictionary of 
+    key, value pairs where the keys are prefixes and the values
+    are suffixes
+    """
+
+    dict = {}
+    word_gen = read_file('./text/emma.txt', n=6, skiplines=249)
+
+    for prefix, suffix in word_gen:
+#        I'm changing this to just have a list because the suffix sets seem quite small
+#        v = dict.get(prefix, {})
+#        v[suffix] = v.get(suffix, 0) + 1
+#        dict[prefix] = v
+        lst = dict.get(prefix, [])
+        lst.append(suffix)
+        dict[prefix] = lst
+
+    return dict
+
+
 if __name__ == "__main__":
 
-    word_gen = read_file('./text/emma.txt', n=6, skiplines=249)
-    for a in range(1, 12):
-        print("Word {}: {}".format(a, next(word_gen)))
+#    word_gen = read_file('./text/emma.txt', n=6, skiplines=249)
+#    for a in range(1, 12):
+#        print("Word {}: {}".format(a, next(word_gen)))
 
+    dict = build_dict()
+    print("Dict size: {}".format(len(dict)))
+
+    for k, v in dict.items():
+        if len(v) > 1: print("{}, {}".format(k, v))
