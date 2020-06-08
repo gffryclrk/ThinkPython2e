@@ -59,7 +59,7 @@ def read_file(filename, n, skiplines=0):
 
     return word_generator()
 
-def build_dict():
+def build_dict(prefix_length=2):
     """
     This method uses the read_file() generator to build a dictionary of 
     key, value pairs where the keys are prefixes and the values
@@ -67,7 +67,7 @@ def build_dict():
     """
 
     dict = {}
-    word_gen = read_file('./text/emma.txt', n=6, skiplines=249)
+    word_gen = read_file('../text/emma.txt', n=prefix_length, skiplines=249)
 
     for prefix, suffix in word_gen:
 #        I'm changing this to just have a list because the suffix sets seem quite small
@@ -83,12 +83,12 @@ def build_dict():
 
 if __name__ == "__main__":
 
-#    word_gen = read_file('./text/emma.txt', n=6, skiplines=249)
-#    for a in range(1, 12):
-#        print("Word {}: {}".format(a, next(word_gen)))
-
-    dict = build_dict()
+    dict = build_dict(2)
     print("Dict size: {}".format(len(dict)))
 
+    max = 0
     for k, v in dict.items():
+        if len(v) > max: max = len(v)
         if len(v) > 1: print("{}, {}".format(k, v))
+
+    print("Max number of suffixes for a given prefix: {}".format(max))
