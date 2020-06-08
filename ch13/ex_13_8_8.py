@@ -23,6 +23,10 @@ Credit: This case study is based on an example from Kernighan and Pike, The Prac
 """
 First, I want to write an iterator that yeilds n words from a file
 """
+import sys
+sys.path.append('ch13/')
+
+from cumsum import cumsum
 
 import string
 from collections import deque
@@ -71,16 +75,30 @@ def build_dict(prefix_length=2):
 
     for prefix, suffix in word_gen:
 #        I'm changing this to just have a list because the suffix sets seem quite small
-#        v = dict.get(prefix, {})
-#        v[suffix] = v.get(suffix, 0) + 1
-#        dict[prefix] = v
-        lst = dict.get(prefix, [])
-        lst.append(suffix)
-        dict[prefix] = lst
+        v = dict.get(prefix, {})
+        v[suffix] = v.get(suffix, 0) + 1
+        dict[prefix] = v
+#        lst = dict.get(prefix, [])
+#        lst.append(suffix)
+#        dict[prefix] = lst
 
     return dict
 
+def build_organized_dict(dict):
+    """
+    This function takes unorganized parse of corpus,
+    which is (k,v) = (prefix: {suffix: count})
+    and transforms it to (k,v) = (prefix: {"suffixes": [], "frequences": []}),
+    where 'suffixes' is an ordered list of suffixes in descding order of frequency
+    and 'frequencies' is a cumulative sum of frequencies of the suffix in the same
+    list position. 
+    """
 
+    ordered_dict = {}
+    for k,v in dict:
+        
+    
+    
 if __name__ == "__main__":
 
     dict = build_dict(2)
