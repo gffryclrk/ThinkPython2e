@@ -25,12 +25,14 @@ First, I want to write an iterator that yeilds n words from a file
 """
 import sys
 sys.path.append('ch13/')
+import ex_13_7_7 as ex13
 
 from cumsum import cumsum
 
 import string
 from collections import deque
 import itertools
+from random import Random
 import pdb
 
 def read_file(filename, n, skiplines=0):
@@ -79,7 +81,7 @@ def build_dict(prefix_length=2):
         v[suffix] = v.get(suffix, 0) + 1
         dict[prefix] = v
 #        lst = dict.get(prefix, [])
-#        lst.append(suffix)
+#       lst.append(suffix)
 #        dict[prefix] = lst
 
     return dict
@@ -95,18 +97,28 @@ def build_organized_dict(dict):
     """
 
     ordered_dict = {}
-    for k,v in dict:
+    for k,v in dict.items():
+        pdb.set_trace()
+        sorted_v_list = ex13.sort_hist_to_list(v)
+        sorted_freq_list = [x[1] for x in sorted_v_list]
+        sorted_word_list = [x[0] for x in sorted_v_list]
+        ordered_dict[k] = {'suffixes': sorted_word_list, 'frequencies': cumsum(sorted_freq_list)}
         
-    
+
+    return ordered_dict
     
 if __name__ == "__main__":
+  dict = build_dict(4)
+  print("Dict size: {}".format(len(dict)))
 
-    dict = build_dict(2)
-    print("Dict size: {}".format(len(dict)))
+  max = 0
+#  for k, v in dict.items():
+#    if len(v) > max:
+#        max = len(v)
+#        print("{}, {}".format(k, v))
 
-    max = 0
-    for k, v in dict.items():
-        if len(v) > max: max = len(v)
-        if len(v) > 1: print("{}, {}".format(k, v))
+#  print("Max number of suffixes for a given prefix: {}".format(max))
 
-    print("Max number of suffixes for a given prefix: {}".format(max))
+  ordered_dict = build_organized_dict(dict)
+  
+  
