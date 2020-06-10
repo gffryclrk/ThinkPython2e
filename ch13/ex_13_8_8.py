@@ -128,13 +128,7 @@ if __name__ == "__main__":
 
   ordered_dict = build_organized_dict(dict)
 
-  max = 0
-  for k, v in ordered_dict.items():
-    if v['frequencies'][-1] > max:
-        max = v['frequencies'][-1]
-        print(f"{max}: {k}")
-        print(f"{choose_suffix(k, ordered_dict)}")
-
+  most_suffixes = max(ordered_dict.items(), key = lambda x: x[1]['frequencies'][-1])
     
 
       
