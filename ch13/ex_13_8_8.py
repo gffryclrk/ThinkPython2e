@@ -76,13 +76,9 @@ def build_dict(prefix_length=2):
     word_gen = read_file('../text/emma.txt', n=prefix_length, skiplines=249)
 
     for prefix, suffix in word_gen:
-#        I'm changing this to just have a list because the suffix sets seem quite small
         v = dict.get(prefix, {})
         v[suffix] = v.get(suffix, 0) + 1
         dict[prefix] = v
-#        lst = dict.get(prefix, [])
-#       lst.append(suffix)
-#        dict[prefix] = lst
 
     return dict
 
@@ -129,6 +125,8 @@ if __name__ == "__main__":
   ordered_dict = build_organized_dict(dict)
 
   most_suffixes = max(ordered_dict.items(), key = lambda x: x[1]['frequencies'][-1])
+
+  print(f"Most suffixes found for {most_suffixes} with {most_suffixes[1]['frequencies'][-1]}")
     
 
       
