@@ -114,8 +114,25 @@ def choose_suffix(prefix, ordered_dict):
     
     return v['suffixes'][rand_word_index]
 
+def choose_n_words(ordered_dict, beginning, n=10):
+    """
+    This function chooses words from the Markov chain
+    """
+    
+    def choose_word(frequencies, suffixes):
+        """
+        Choose random word proportionally from given frequency & suffix lists
+        """
+
+        rand_n = random.randint(0, frequencies[-1])
+        rand_word_index = ex13_7.binary_search_leftmost(frequencies, len(frequencies), rand_n)
+        rand_word = suffixes[rand_word_index]
+        return rand_word
 
     
+    pdb.set_trace()
+    word = choose_word(ordered_dict[beginning]['frequencies'], ordered_dict[beginning]['suffixes'])
+
 if __name__ == "__main__":
   dict = build_dict(4)
   print("Dict size: {}".format(len(dict)))
@@ -128,7 +145,7 @@ if __name__ == "__main__":
 
   print(f"Most suffixes found for {most_suffixes} with {most_suffixes[1]['frequencies'][-1]}")
     
-
+  choose_n_words(ordered_dict, most_suffixes[0], 10)
       
 
   
