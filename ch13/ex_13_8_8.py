@@ -117,6 +117,10 @@ def choose_suffix(prefix, ordered_dict):
 def choose_n_words(ordered_dict, beginning, n=10):
     """
     This function chooses words from the Markov chain
+    @param ordered_dict - dictionary in proper format
+    @param beginning - tuple to 'prime the pump'
+                       This value is also used judge the length of prefix
+    @param n - Number of words to generate
     """
     
     def choose_word(frequencies, suffixes):
@@ -130,8 +134,22 @@ def choose_n_words(ordered_dict, beginning, n=10):
         return rand_word
 
     
-    pdb.set_trace()
-    word = choose_word(ordered_dict[beginning]['frequencies'], ordered_dict[beginning]['suffixes'])
+    output = list(beginning)
+    prefix_length = len(beginning)
+    while len(output) < (n + prefix_length):
+        pdb.set_trace()
+        word = choose_word(ordered_dict[beginning]['frequencies'], ordered_dict[beginning]['suffixes'])
+        new_prefix = tuple(output[-(prefix_length -1 ):] + [word])
+        old_prefix = tuple(output[-(prefix_length):])
+        if new_prefix in ordered_dict:
+            output.append(word)
+        elif len(ordered_dict[old_prefix]['suffixes']) == 1:
+            raise ValueError(f"Combination of generated suffixes has made it impossible to proceed: {output}")
+
+
+    return output
+
+        
 
 if __name__ == "__main__":
   dict = build_dict(4)

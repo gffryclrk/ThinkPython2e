@@ -53,7 +53,7 @@ if __name__ == '__main__':
 
     
     emma_counts = wc.word_count_dict(
-            wg.read_file('text/emma.txt', skiplines=249)
+            wg.read_file('../text/emma.txt', skiplines=249)
     )
 
     sorted_emma_counts_list = sort_hist_to_list(emma_counts)
