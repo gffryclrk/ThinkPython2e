@@ -73,7 +73,7 @@ def build_dict(prefix_length=2):
     """
 
     dict = {}
-    word_gen = read_file('../text/emma.txt', n=prefix_length, skiplines=249)
+    word_gen = read_file('text/emma.txt', n=prefix_length, skiplines=249)
 
     for prefix, suffix in word_gen:
         v = dict.get(prefix, {})
@@ -152,18 +152,18 @@ def choose_n_words(ordered_dict, beginning, n=10):
         
 
 if __name__ == "__main__":
-  dict = build_dict(4)
+  dict = build_dict(3)
   print("Dict size: {}".format(len(dict)))
-
-
 
   ordered_dict = build_organized_dict(dict)
 
   most_suffixes = max(ordered_dict.items(), key = lambda x: x[1]['frequencies'][-1])
 
   print(f"Most suffixes found for {most_suffixes} with {most_suffixes[1]['frequencies'][-1]}")
+
+  capital_starters = [e[0] for e in ordered_dict.items() if e[0][0].isupper()]
     
-  choose_n_words(ordered_dict, most_suffixes[0], 10)
+  choose_n_words(ordered_dict, random.choice(capital_starters), 10)
       
 
   
