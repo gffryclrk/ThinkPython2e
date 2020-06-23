@@ -138,12 +138,19 @@ def choose_n_words(ordered_dict, beginning, n=10):
     prefix_length = len(beginning)
     while len(output) < (n + prefix_length):
         pdb.set_trace()
-        word = choose_word(ordered_dict[beginning]['frequencies'], ordered_dict[beginning]['suffixes'])
-        new_prefix = tuple(output[-(prefix_length -1 ):] + [word])
+
+        # Generate prefix to select suffix from
         old_prefix = tuple(output[-(prefix_length):])
+
+        # Select suffix
+        word = choose_word(ordered_dict[old_prefix]['frequencies'], ordered_dict[old_prefix]['suffixes'])
+
+        # Create possible new prefix to check and see if there is a suffix
+        new_prefix = tuple(output[-(prefix_length -1 ):] + [word])
+
         if new_prefix in ordered_dict:
             output.append(word)
-        elif len(ordered_dict[old_prefix]['suffixes']) == 1:
+        elif new_prefix not in ordered_dict and len(ordered_dict[old_prefix]['suffixes']) == 1:
             raise ValueError(f"Combination of generated suffixes has made it impossible to proceed: {output}")
 
 
@@ -162,7 +169,9 @@ if __name__ == "__main__":
   print(f"Most suffixes found for {most_suffixes} with {most_suffixes[1]['frequencies'][-1]}")
 
   capital_starters = [e[0] for e in ordered_dict.items() if e[0][0].isupper()]
-    
+
+  # I tested this with the following parameters:
+  # choose_n_words(ordered_dict, ('I', 'shall', 'press'), 10
   choose_n_words(ordered_dict, random.choice(capital_starters), 10)
       
 
