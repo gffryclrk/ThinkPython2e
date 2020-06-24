@@ -65,7 +65,7 @@ def read_file(filename, n, skiplines=0):
 
     return word_generator()
 
-def build_dict(prefix_length=2):
+def build_dict(filename, prefix_length=2):
     """
     This method uses the read_file() generator to build a dictionary of 
     key, value pairs where the keys are prefixes and the values
@@ -73,7 +73,7 @@ def build_dict(prefix_length=2):
     """
 
     dict = {}
-    word_gen = read_file('text/emma.txt', n=prefix_length, skiplines=249)
+    word_gen = read_file(filename, n=prefix_length, skiplines=249)
 
     for prefix, suffix in word_gen:
         v = dict.get(prefix, {})
@@ -159,7 +159,8 @@ def choose_n_words(ordered_dict, beginning, n=10):
         
 
 if __name__ == "__main__":
-  dict = build_dict(3)
+
+  dict = build_dict('text/emma.txt', 3)
   print("Dict size: {}".format(len(dict)))
 
   ordered_dict = build_organized_dict(dict)

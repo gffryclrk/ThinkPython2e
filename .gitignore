@@ -1,7 +1,10 @@
 *.swp
+*.swo
 *.DS_Store
 __pycache__
 ch11/search/*
 *.py~
 ENV/*
 env3/*
+TAGS
+solutions/*
