@@ -65,14 +65,14 @@ def read_file(filename, n, skiplines=0):
 
     return word_generator()
 
-def build_dict(filename, prefix_length=2):
+def build_dict(filename, prefix_length=2, starting_dict={}):
     """
     This method uses the read_file() generator to build a dictionary of 
     key, value pairs where the keys are prefixes and the values
     are suffixes
     """
 
-    dict = {}
+    dict = starting_dict
     word_gen = read_file(filename, n=prefix_length, skiplines=249)
 
     for prefix, suffix in word_gen:
@@ -137,7 +137,6 @@ def choose_n_words(ordered_dict, beginning, n=10):
     output = list(beginning)
     prefix_length = len(beginning)
     while len(output) < (n + prefix_length):
-        pdb.set_trace()
 
         # Generate prefix to select suffix from
         old_prefix = tuple(output[-(prefix_length):])
