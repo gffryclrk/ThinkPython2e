@@ -5,7 +5,8 @@ import ex_13_8_8 as markov
 
 class TestChooseNWords(unittest.TestCase):
     def setUp(self):
-        self.parse_dict = markov.build_dict('text/emma.txt', 3)
+        gen = markov.read_file('text/emma.txt', 3, 249)
+        self.parse_dict = markov.build_dict(gen)
         self.od = markov.build_organized_dict(self.parse_dict)
 
     def testOrderedDict(self):
@@ -27,7 +28,8 @@ class TestChooseNWords(unittest.TestCase):
         """
         Test and see if its possible to load multiple books into a readable dictionary
         """
-        self.asserTrue(1 == 1)   # stub
+        
+        self.assertTrue(1 == 1)   # TODO: Update this to an actual test
 
 
 if __name__ == '__main__':

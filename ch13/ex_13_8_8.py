@@ -38,6 +38,14 @@ import pdb
 def read_file(filename, n, skiplines=0):
     """
     Returns a function that returns n word generator from input file. 
+
+    Args:
+      filename: file from which words are read
+      n: number of words to be returned in tuple
+      skiplines: number of lines to skip in input file
+
+    Returns:
+      Iterator which returns a tuple of n words on each call
     """
 
     def word_generator():
@@ -65,7 +73,7 @@ def read_file(filename, n, skiplines=0):
 
     return word_generator()
 
-def build_dict(filename, prefix_length=2, starting_dict={}):
+def build_dict(word_gen, starting_dict={}):
     """
     This method uses the read_file() generator to build a dictionary of 
     key, value pairs where the keys are prefixes and the values
@@ -73,7 +81,7 @@ def build_dict(filename, prefix_length=2, starting_dict={}):
     """
 
     dict = starting_dict
-    word_gen = read_file(filename, n=prefix_length, skiplines=249)
+#    word_gen = read_file(filename, n=prefix_length, skiplines=249)
 
     for prefix, suffix in word_gen:
         v = dict.get(prefix, {})
@@ -159,7 +167,8 @@ def choose_n_words(ordered_dict, beginning, n=10):
 
 if __name__ == "__main__":
 
-  dict = build_dict('text/emma.txt', 3)
+  gen = read_file('text/emma.txt', 3, 249)
+  dict = build_dict(gen)
   print("Dict size: {}".format(len(dict)))
 
   ordered_dict = build_organized_dict(dict)
