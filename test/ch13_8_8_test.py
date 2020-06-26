@@ -13,6 +13,7 @@ class TestChooseNWords(unittest.TestCase):
         """
         Test length of ordered dictionary is correct
         """
+        print(f"len of self.od: {len(self.od)}")
         self.assertTrue(len(self.od) == 137448)
 
     def testChoose_I_shall_press(self):
@@ -26,10 +27,20 @@ class TestChooseNWords(unittest.TestCase):
 
     def testLoadMultipleBooks(self):
         """
-        Test and see if its possible to load multiple books into a readable dictionary
+        Test load multiple books into pre-generated dictionary
         """
+
+        prefix1 = ('A', 'SCANDAL', 'IN') 
+        prefix2 = ('SCANDAL', 'IN', 'BOHEMIA')
+
+        mash_up = self.od
+        self.assertFalse(prefix1 in mash_up or prefix2 in mash_up)
+
+        sherlock_gen = markov.read_file('text/sherlock_1661-0.txt', 3, 249)
+        mash_up = markov.build_dict(sherlock_gen, self.parse_dict)
+
+        self.assertTrue(prefix1 in self.parse_dict and prefix2 in self.parse_dict)
         
-        self.assertTrue(1 == 1)   # TODO: Update this to an actual test
 
 
 if __name__ == '__main__':

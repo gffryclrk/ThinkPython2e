@@ -167,8 +167,9 @@ def choose_n_words(ordered_dict, beginning, n=10):
 
 if __name__ == "__main__":
 
-  gen = read_file('text/emma.txt', 3, 249)
-  dict = build_dict(gen)
+  emma_gen = read_file('text/emma.txt', 3, 249)
+  sherlock_gen = read_file('text/sherlock_1661-0.txt', 3, 58)
+  dict = build_dict(sherlock_gen, build_dict(emma_gen))
   print("Dict size: {}".format(len(dict)))
 
   ordered_dict = build_organized_dict(dict)
@@ -181,7 +182,7 @@ if __name__ == "__main__":
 
   # I tested this with the following parameters:
   # choose_n_words(ordered_dict, ('I', 'shall', 'press'), 10
-  choose_n_words(ordered_dict, random.choice(capital_starters), 10)
+  generated_text = choose_n_words(ordered_dict, random.choice(capital_starters), 10)
       
 
   
