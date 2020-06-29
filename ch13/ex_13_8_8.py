@@ -79,7 +79,6 @@ def build_dict(word_gen, starting_dict={}):
     key, value pairs where the keys are prefixes and the values
     are suffixes
     """
-
     dict = starting_dict
 #    word_gen = read_file(filename, n=prefix_length, skiplines=249)
 
@@ -170,6 +169,7 @@ if __name__ == "__main__":
   emma_gen = read_file('text/emma.txt', 3, 249)
   sherlock_gen = read_file('text/sherlock_1661-0.txt', 3, 58)
   dict = build_dict(sherlock_gen, build_dict(emma_gen))
+  dict = build_dict(emma_gen, {})
   print("Dict size: {}".format(len(dict)))
 
   ordered_dict = build_organized_dict(dict)

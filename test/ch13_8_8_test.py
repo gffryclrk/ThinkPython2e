@@ -11,10 +11,14 @@ class TestChooseNWords(unittest.TestCase):
 
     def testOrderedDict(self):
         """
-        Test length of ordered dictionary is correct
+        re-run generator and ensure every prefix is in dict
         """
-        print(f"len of self.od: {len(self.od)}")
-        self.assertTrue(len(self.od) == 137448)
+        emma_gen = markov.read_file('text/emma.txt', 3, 249)
+        for prefix in emma_gen:
+            if prefix[0] not in self.od: print(f'prefix {prefix[0]} not found in od')
+            self.assertTrue(prefix[0] in self.od)
+            
+#        self.assertTrue(len(self.od) == 137448)
 
     def testChoose_I_shall_press(self):
         """
@@ -39,7 +43,7 @@ class TestChooseNWords(unittest.TestCase):
         sherlock_gen = markov.read_file('text/sherlock_1661-0.txt', 3, 249)
         mash_up = markov.build_dict(sherlock_gen, self.parse_dict)
 
-        self.assertTrue(prefix1 in self.parse_dict and prefix2 in self.parse_dict)
+        self.assertTrue(prefix1 in mash_up and prefix2 in mash_up)
         
 
 
