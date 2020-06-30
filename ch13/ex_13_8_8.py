@@ -80,7 +80,6 @@ def build_dict(word_gen, starting_dict={}):
     are suffixes
     """
     dict = starting_dict
-#    word_gen = read_file(filename, n=prefix_length, skiplines=249)
 
     for prefix, suffix in word_gen:
         v = dict.get(prefix, {})

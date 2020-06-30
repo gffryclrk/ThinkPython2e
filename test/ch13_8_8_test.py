@@ -4,6 +4,7 @@ sys.path.append('ch13/')
 import ex_13_8_8 as markov
 
 class TestChooseNWords(unittest.TestCase):
+
     def setUp(self):
         gen = markov.read_file('text/emma.txt', 3, 249)
         self.parse_dict = markov.build_dict(gen)
@@ -40,7 +41,7 @@ class TestChooseNWords(unittest.TestCase):
         mash_up = self.od
         self.assertFalse(prefix1 in mash_up or prefix2 in mash_up)
 
-        sherlock_gen = markov.read_file('text/sherlock_1661-0.txt', 3, 249)
+        sherlock_gen = markov.read_file('text/sherlock_1661-0.txt', 3, 58)
         mash_up = markov.build_dict(sherlock_gen, self.parse_dict)
 
         self.assertTrue(prefix1 in mash_up and prefix2 in mash_up)
