@@ -8,3 +8,4 @@ ENV/*
 env3/*
 TAGS
 solutions/*
+tmp/*
