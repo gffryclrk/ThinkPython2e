@@ -4,6 +4,8 @@ when I revisited the code to import it as a module for exercise
 where necessary here.
 """
 
+import pdb
+
 def word_gen(path, skiplines=0):
     """Similar to ex_13_7_7, I would like to use a generator to read the file"""
 
@@ -24,8 +26,8 @@ def build_anagram_dict(word_gen, starting_dict={}):
 
     for word in word_gen:
         key = tuple(sorted(word))
-        l = dict.get(key, [])
-        dict[key] = l.append(word)
+        word_list = dict.get(key, [])
+        dict[key] = word_list + [word]
 
     return dict
 
