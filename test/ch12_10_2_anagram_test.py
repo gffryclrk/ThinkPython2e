@@ -31,15 +31,24 @@ class TestAnagramSets(unittest.TestCase):
             f.write(' '.join(line) + '\n')
 
         f.close()
+        
+        tmp_gen = ag.word_gen(self.test_file_path)
+        self.anagram_dict = ag.build_anagram_dict(tmp_gen)
 
 
     def test_build_anagram_dict(self):
         """Test anagram file written in setUp can be read using generator and method from implementation"""
 
-        tmp_gen = ag.word_gen(self.test_file_path)
-        anagram_dict = ag.build_anagram_dict(tmp_gen)
-        self.assertTrue(len(self.sample_anagrams) == len(anagram_dict))
+        self.assertTrue(len(self.sample_anagrams) == len(self.anagram_dict))
 
+    def test_anagram_in_proper_value_for_key(self):
+        """Check and make sure values of each list are in list with same key"""
+        for list in self.sample_anagrams:
+            key = tuple(sorted(list[0]))
+
+            sample_set = set(list)
+            dict_set = set(self.anagram_dict[key])
+            self.assertTrue(len(sample_set - dict_set) == 0)
 
 if __name__ == '__main__':
     unittest.main()
