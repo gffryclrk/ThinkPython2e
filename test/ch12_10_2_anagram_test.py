@@ -11,6 +11,7 @@ import sys
 sys.path.append('ch12/')
 import ex12_10_2_redo as ag
 from pathlib import Path
+import timeit
 
 class TestAnagramSets(unittest.TestCase):
 
@@ -35,12 +36,14 @@ class TestAnagramSets(unittest.TestCase):
         tmp_gen = ag.word_gen(self.test_file_path)
         self.anagram_dict = ag.build_anagram_dict(tmp_gen)
 
-
+    @unittest.SkipTest
     def test_build_anagram_dict(self):
         """Test anagram file written in setUp can be read using generator and method from implementation"""
 
         self.assertTrue(len(self.sample_anagrams) == len(self.anagram_dict))
 
+
+    @unittest.SkipTest
     def test_anagram_in_proper_value_for_key(self):
         """Check and make sure values of each list are in list with same key"""
         for list in self.sample_anagrams:
@@ -49,6 +52,23 @@ class TestAnagramSets(unittest.TestCase):
             sample_set = set(list)
             dict_set = set(self.anagram_dict[key])
             self.assertTrue(len(sample_set - dict_set) == 0)
+
+    
+    def test_custom_hash_count(self):
+        """Test custom hasher time versus sorting keys"""
+        
+        setup = """import sys; sys.path.append('ch12/'); import ex12_10_2_redo as ag;"""
+
+        custom_hash_code = "emma_gen = ag.word_gen('text/emma.txt', skiplines=249); ag.build_anagram_dict(emma_gen, hash_fn=ag.custom_hash)"
+        custom_hash_time = min(timeit.Timer(custom_hash_code, setup=setup).repeat(1, 5))
+        print(f'custom_hash time run: {custom_hash_time}')
+
+        sorted_code = "emma_gen = ag.word_gen('text/emma.txt', skiplines=249); ag.build_anagram_dict(emma_gen)"
+        sorted_time = min(timeit.Timer(sorted_code, setup=setup).repeat(1, 5))
+        print(f'sorted time run: {sorted_time}')
+
+        
+        self.assertTrue(sorted_time > custom_hash_time)
 
 if __name__ == '__main__':
     unittest.main()
