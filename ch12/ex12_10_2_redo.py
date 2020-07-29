@@ -32,3 +32,13 @@ def build_anagram_dict(word_gen, starting_dict={}):
     return dict
 
     
+if __name__ == '__main__':
+    """Write a program that reads a word list from a file (see Section 9.1) and prints all the sets of words that are anagrams."""
+
+    emma_gen = word_gen("text/emma.txt")
+    dict = build_anagram_dict(emma_gen)
+
+    # Lifting this from my original solution
+    # Below needs work...
+#    sorted_angram_lengths = [k for (k, v) in sorted(lengths.items(), key = lambda item: len(item[1]), reverse=True)]
+    
