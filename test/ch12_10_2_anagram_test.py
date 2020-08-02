@@ -32,7 +32,7 @@ class TestAnagramSets(unittest.TestCase):
             f.write(' '.join(line) + '\n')
 
         f.close()
-        
+
         tmp_gen = ag.word_gen(self.test_file_path)
         self.anagram_dict = ag.build_anagram_dict(tmp_gen)
 
@@ -41,7 +41,6 @@ class TestAnagramSets(unittest.TestCase):
         """Test anagram file written in setUp can be read using generator and method from implementation"""
 
         self.assertTrue(len(self.sample_anagrams) == len(self.anagram_dict))
-
 
     @unittest.SkipTest
     def test_anagram_in_proper_value_for_key(self):
@@ -52,10 +51,24 @@ class TestAnagramSets(unittest.TestCase):
             sample_set = set(list)
             dict_set = set(self.anagram_dict[key])
             self.assertTrue(len(sample_set - dict_set) == 0)
+            
+    @unittest.SkipTest
+    def test_custom_hash_fn(self):
+        """Test custom hash function works on sample file"""
+        hash_gen = ag.word_gen(self.test_file_path)
+        hash_dict = ag.build_anagram_dict(hash_gen, hash_fn=ag.custom_hash)
 
-    
+        self.assertTrue(len(hash_dict) > 0)
+
+        
+#    @unittest.SkipTest
     def test_custom_hash_count(self):
-        """Test custom hasher time versus sorting keys"""
+        """Test custom hasher time versus sorting 
+
+        2017 MBP:
+          custom_hash time run: 70.468206092 (contains issues)
+          sorted time run: 66.07943855
+        """
         
         setup = """import sys; sys.path.append('ch12/'); import ex12_10_2_redo as ag;"""
 

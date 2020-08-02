@@ -11,6 +11,8 @@ def word_gen(path, skiplines=0):
     to read the file.
     
     In order to simplify custom hashing using prime multipltiplication punctuation is stripped. This is not a parameter. 
+
+    The string is also being converted to lowercase before being returned for compatability with hashing
     """
 
     with open(path) as f:
@@ -19,7 +21,7 @@ def word_gen(path, skiplines=0):
         for line in f:
             stripped_line = line.translate(str.maketrans('', '', string.punctuation))
             for word in stripped_line.split():
-                yield word
+                yield word.lower()
 
 
 def custom_hash(str_in):
@@ -46,7 +48,7 @@ def custom_hash(str_in):
      
     return hash_count
 
-def build_anagram_dict(word_gen, starting_dict={}, hash_fn=sorted):
+def build_anagram_dict(word_gen, starting_dict={}, hash_fn=lambda x: tuple(sorted(x))):
     """This is also based largely on the ex_13_7_7 solution.
     This method returns a reference to the dictionary which was 
     updated or created. 
@@ -55,8 +57,9 @@ def build_anagram_dict(word_gen, starting_dict={}, hash_fn=sorted):
     dict = starting_dict
 
     for word in word_gen:
-        key = tuple(hash_fn(word))
+        key = hash_fn(word)
         word_list = dict.get(key, [])
+        #TODO: Using list as dict value will result in duplicates, consider hash table
         dict[key] = word_list + [word]
 
     return dict
