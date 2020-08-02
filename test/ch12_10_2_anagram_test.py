@@ -60,14 +60,16 @@ class TestAnagramSets(unittest.TestCase):
 
         self.assertTrue(len(hash_dict) > 0)
 
-        
-#    @unittest.SkipTest
+    @unittest.SkipTest
     def test_custom_hash_count(self):
-        """Test custom hasher time versus sorting 
+        """Test custom hasher time versus sorting
+        Changes in implementation to facilitate:
+        - Word generator returns lowercase letters only
+        - Word generator strips & removes puncuation & digits
 
         2017 MBP:
-          custom_hash time run: 70.468206092 (contains issues)
-          sorted time run: 66.07943855
+        - custom_hash time run: 69.600459882
+        - sorted time run: 69.74145725199992
         """
         
         setup = """import sys; sys.path.append('ch12/'); import ex12_10_2_redo as ag;"""

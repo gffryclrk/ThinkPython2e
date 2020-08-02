@@ -19,7 +19,7 @@ def word_gen(path, skiplines=0):
         for _ in range(skiplines):
             next(f)
         for line in f:
-            stripped_line = line.translate(str.maketrans('', '', string.punctuation))
+            stripped_line = line.translate(str.maketrans('', '', string.punctuation+string.digits))
             for word in stripped_line.split():
                 yield word.lower()
 
