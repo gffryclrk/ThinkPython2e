@@ -36,13 +36,13 @@ class TestAnagramSets(unittest.TestCase):
         tmp_gen = ag.word_gen(self.test_file_path)
         self.anagram_dict = ag.build_anagram_dict(tmp_gen)
 
-    @unittest.SkipTest
+
     def test_build_anagram_dict(self):
         """Test anagram file written in setUp can be read using generator and method from implementation"""
 
         self.assertTrue(len(self.sample_anagrams) == len(self.anagram_dict))
 
-    @unittest.SkipTest
+
     def test_anagram_in_proper_value_for_key(self):
         """Check and make sure values of each list are in list with same key"""
         for list in self.sample_anagrams:
@@ -52,7 +52,7 @@ class TestAnagramSets(unittest.TestCase):
             dict_set = set(self.anagram_dict[key])
             self.assertTrue(len(sample_set - dict_set) == 0)
             
-    @unittest.SkipTest
+
     def test_custom_hash_fn(self):
         """Test custom hash function works on sample file"""
         hash_gen = ag.word_gen(self.test_file_path)
