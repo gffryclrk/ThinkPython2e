@@ -76,8 +76,8 @@ if __name__ == '__main__':
     emma_gen = word_gen("text/emma.txt")
     dict = build_anagram_dict(emma_gen)
 
-    # Modify the previous program so that it prints the longest list
-    # of anagrams first, followed by the second longest, and so on.
+    """Modify the previous program so that it prints the longest list of
+anagrams first, followed by the second longest, and so on."""
 
     # This line below is unneeded because sort uses original dict
     # dictlen = {k:len(v) for (k,v) in dict.items()}
@@ -87,4 +87,15 @@ if __name__ == '__main__':
     print("Printing anagrams in descending order of frequency:")
     for a, b in zip(range(10), ordered_dict_keys):
         print(f"  {a+1}: {b} has {len(dict[b])} anagrams: { ' '.join(dict[b].keys())}")
+
+    """In Scrabble a “bingo” is when you play all seven tiles in your
+    rack, along with a letter on the board, to form an eight-letter
+    word. What collection of 8 letters forms the most possible
+    bingos?"""
+    
+    bingo_dict = {k:v for (k,v) in dict.items() if len(k) == 8}
+    ordered_bingo_keys = sorted(bingo_dict, key=lambda key: len(bingo_dict[key]), reverse=True)
+    print("Printing scrabble bingo anagrams (8 letters) in descending order of frequency:")
+    for a, b in zip(range(10), ordered_bingo_keys):
+        print(f"  {a+1}: {b} has {len(bingo_dict[b])} anagrams: { ' '.join(bingo_dict[b].keys())}")
     
