@@ -78,17 +78,13 @@ if __name__ == '__main__':
 
     # Modify the previous program so that it prints the longest list
     # of anagrams first, followed by the second longest, and so on.
-    dictlen = {k:len(v) for (k,v) in dict.items()}
-    """max(dictlen, key=dictlen.get)
-    ('e', 'h', 'o', 's', 't')
-    >>> dictlen[('e', 'h', 'o', 's', 't')]
-    3
-    >>> dict[('e', 'h', 'o', 's', 't')]
-    {'those': None, 'sothe': None, 'sheto': None}"""
 
-    it = iter(sorted(dictlen, key=dictlen.__getitem__, reverse=True))
-    """
-    >>> next(it)
-    ('e', 'h', 'o', 's', 't')
-    """
+    # This line below is unneeded because sort uses original dict
+    # dictlen = {k:len(v) for (k,v) in dict.items()}
+
+    ordered_dict_keys = sorted(dict, key=lambda key: len(dict[key]), reverse=True)
+
+    print("Printing anagrams in descending order of frequency:")
+    for a, b in zip(range(10), ordered_dict_keys):
+        print(f"  {a+1}: {b} has {len(dict[b])} anagrams: { ' '.join(dict[b].keys())}")
     
