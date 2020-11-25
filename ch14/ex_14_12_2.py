@@ -12,3 +12,27 @@ Write a module that imports anagram_sets and provides two new
 functions: store_anagrams should store the anagram dictionary in a
 “shelf”; read_anagrams should look up a word and return a list of its
 anagrams. Solution: http://thinkpython2.com/code/anagram_db.py.  """
+
+import sys
+sys.path.append('ch12/')
+import ex12_10_2_redo as ag
+
+import shelve
+
+def store_anagrams(dict, shelf):
+    """This function writes the provided dict to a provided shelf"""
+    for k in iter(dict):
+        shelf[k] = dict[k]
+
+
+def read_anagrams(word):
+    """This function reads anagrams from the shelf?"""
+
+
+if __name__ == '__main__':
+    word_gen = ag.word_gen("text/words.txt")
+    dict = ag.build_anagram_dict(word_gen)
+
+    db = shelve.open('anagrams')
+    store_anagrams(dict, db)
+    db.close()
