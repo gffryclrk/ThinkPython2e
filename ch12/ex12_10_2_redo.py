@@ -61,10 +61,10 @@ def build_anagram_dict(word_gen, starting_dict={}, hash_fn=lambda x: tuple(sorte
 
     for word in word_gen:
         key = hash_fn(word)
+        # Using dictionary as hashtable to eliminate duplicates (when reading from literature etc)
         word_list = dict.get(key, {})
-        #TODO: Using list as dict value will result in duplicates, consider hash table
         word_list[word] = None
-        dict[key]= word_list
+        dict[key] = word_list
 
     return dict
 

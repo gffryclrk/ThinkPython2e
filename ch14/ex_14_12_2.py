@@ -25,14 +25,21 @@ def store_anagrams(dict, shelf):
         shelf[k] = dict[k]
 
 
-def read_anagrams(word):
-    """This function reads anagrams from the shelf?"""
+def read_anagrams(word, shelf):
+    """This function reads anagrams from the shelf?
+    Pointless if you know how to use the shelve or dbm modules,
+    regardless lets provide a wrapper as asked"""
 
+    return shelf[word]
 
 if __name__ == '__main__':
     word_gen = ag.word_gen("text/words.txt")
-    dict = ag.build_anagram_dict(word_gen)
+    dict = ag.build_anagram_dict(word_gen, hash_fn = lambda x: ''.join(sorted(x)))
 
     db = shelve.open('anagrams')
     store_anagrams(dict, db)
+    db.close()
+
+    db = shelve.open('anagrams')
+    print(f'returning anagrams for "adeest" from shelf: {", ".join(read_anagrams("adeest", db).keys())}')
     db.close()
