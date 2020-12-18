@@ -30,19 +30,3 @@ if __name__ == '__main__':
 
     print(f'distance between p1 & p2: {distance_between_points(p1, p2)}')
 
-    # 15.2
-    box = Rectangle()
-    box.width = 100.0
-    box.height = 200.0
-    box.corner = Point()
-    box.corner.x = 0.0
-    box.corner.y = 0.0
-
-    center = find_center(box)
-    print_point(center)
-
-    #15.5
-    print(f'box corner x, y before move_rectangle: {box.corner.x}, {box.corner.y}')
-    move_rectangle(box, 5, 5)
-    print(f'box corner x, y after move_rectangle: {box.corner.x}, {box.corner.y}')
-    

@@ -1,6 +1,5 @@
 import math
 import turtle
-bob = turtle.Turtle()
 
 def square(t, length):
   for i in range(4):
@@ -59,11 +58,14 @@ def flower(t, flower_radius, petal_radius, petal_quantity):
         t.rt( 360 / petal_quantity)
 
 
-bob.speed(0)
-# flower(bob, 140, 90, 6)
-# flower(bob, 140, 90, 3)
-# flower(bob, 100, 200, 6)
-# flower(bob, 60, 90, 10)
-flower(bob, 200, 300, 10)
+if __name__ == '__main__':
+    bob = turtle.Turtle()
 
-turtle.exitonclick()
+    bob.speed(0)
+    # flower(bob, 140, 90, 6)
+    # flower(bob, 140, 90, 3)
+    # flower(bob, 100, 200, 6)
+    # flower(bob, 60, 90, 10)
+    flower(bob, 200, 300, 10)
+
+    turtle.exitonclick()
