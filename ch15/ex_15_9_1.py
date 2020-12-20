@@ -25,19 +25,44 @@ Solution: http://thinkpython2.com/code/Circle.py.
 
 """
 import math
-import pdb
 
 class Point:
     """ ordered pair"""
-    
+    def __init__(self, x = 0, y = 0):
+        self.x = x
+        self.y = y
+
+        
 class Circle:
     """ Has a radius and centre"""
 
+class Rectangle:
+    """ 4 sided figure with 4 90 degree angles """
+    def __init__(self, point = Point(), width = 1, height = 1):
+        self.bl = point #bottom left
+        self.width = width
+        self.height = height
+
+    def points(self):
+        """ Returns list of points in clockwise order starting with bottom left"""
+        return [
+            self.bl,
+            Point(self.bl.x, self.bl.y + self.height),
+            Point(self.bl.x + self.width, self.bl.y + self.height),
+            Point(self.bl.x + self.width, self.bl.y)
+            ]
+            
+    
 def point_in_circle(circle, point):
     """takes a Circle and a Point
     and returns True if the Point lies in or on the boundary of the
     circle."""
     return math.sqrt((point.x - circle.centre.x)**2 + (point.y - circle.centre.y)**2) <= circle.radius
+
+            
+def rect_in_circle(circ, rect):
+    """True if any of the corners of the rectangle fall inside the circle"""
+
     
 if __name__ == '__main__':
     c = Circle()
@@ -55,3 +80,4 @@ if __name__ == '__main__':
     point_on_c.y = 225
     print(f'(150, 225) in c: {point_in_circle(c, point_on_c)}')
     
+    r = Rectangle(Point(0, 0), 100, 100)
