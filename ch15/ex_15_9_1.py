@@ -32,9 +32,17 @@ class Point:
         self.x = x
         self.y = y
 
+    def distance(self, other):
+        """ Returns distance to other point"""
+        return math.sqrt((self.x - other.x)**2 + (self.y - other.y)**2)
+
         
 class Circle:
     """ Has a radius and centre"""
+    def __init__(self, centre = Point(0,0), radius=1):
+        self.centre = centre
+        self.radius = radius
+    
 
 class Rectangle:
     """ 4 sided figure with 4 90 degree angles """
@@ -43,7 +51,7 @@ class Rectangle:
         self.width = width
         self.height = height
 
-    def points(self):
+    def vertices(self):
         """ Returns list of points in clockwise order starting with bottom left"""
         return [
             self.bl,
@@ -52,7 +60,7 @@ class Rectangle:
             Point(self.bl.x + self.width, self.bl.y)
             ]
             
-    
+
 def point_in_circle(circle, point):
     """takes a Circle and a Point
     and returns True if the Point lies in or on the boundary of the
@@ -61,12 +69,17 @@ def point_in_circle(circle, point):
 
             
 def rect_in_circle(circ, rect):
-    """True if any of the corners of the rectangle fall inside the circle"""
+    """True if all of the corners of the rectangle fall inside the circle"""
+    for point in rect.vertices():
+        if not point_in_circle(circ, point):       
+            return False
+
+    return True
 
     
 if __name__ == '__main__':
     c = Circle()
-    c.centre = Point() # This book hasn't taught how to use constructors yet
+    c.centre = Point() 
     c.centre.x = 150
     c.centre.y = 100
     c.radius = 75
