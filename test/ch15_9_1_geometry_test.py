@@ -3,7 +3,7 @@ import math
 import unittest
 import sys
 sys.path.append('ch15/')
-from ex_15_9_1 import Point, Rectangle, Circle, rect_in_circle
+from ex_15_9_1 import Point, Rectangle, Circle, rect_in_circle, distance
 
 class TestGeometry(unittest.TestCase):
 
@@ -38,6 +38,20 @@ class TestGeometry(unittest.TestCase):
         
         
 
+    def test_distance(self):
+        """ Test distance from point to line using known values"""
+        p1 = Point(0,0)
+        p2 = Point(1,1)
+        xy = Point(0,2.5)
 
+        half_hypoteneuse = math.sqrt((2.5 ** 2) + (2.5) ** 2) / 2
+
+        # Using math.isclose because of precision with floats
+        self.assertTrue(
+            math.isclose(
+                distance(p1, p2, xy), half_hypoteneuse
+            )
+        )
+        
 if __name__ == '__main__':
     unittest.main()

@@ -36,7 +36,8 @@ class Point:
         """ Returns distance to other point"""
         return math.sqrt((self.x - other.x)**2 + (self.y - other.y)**2)
 
-        
+
+   
 class Circle:
     """ Has a radius and centre"""
     def __init__(self, centre = Point(0,0), radius=1):
@@ -76,6 +77,28 @@ def rect_in_circle(circ, rect):
 
     return True
 
+def distance(p1, p2, xy):
+    """p1 & p2 are points on the same line. xy is a third point which the distance to the line containing points p1 & p2 is is being calculated and returned
+    https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line"""
+    numer = abs(
+        (p2.x - p1.x)*(p1.y-xy.y)-(p1.x-xy.x)*(p2.y-p1.y)
+        )
+    denom = math.sqrt(
+        (((p2.x-p1.x)**2) + ((p2.y-p1.y)**2))
+         )
+    return (numer / denom)
+
+
+def rect_circle_overlap(circ, rect):
+    """ Returns true if any part of rectangle overlaps circle
+    https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line"""
+    vl = rect.vertices()
+    
+#    for a in range(len(vl)):
+        
+
+
+    
     
 if __name__ == '__main__':
     c = Circle()
