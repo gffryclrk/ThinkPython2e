@@ -3,7 +3,7 @@ import math
 import unittest
 import sys
 sys.path.append('ch15/')
-from ex_15_9_1 import Point, Rectangle, Circle, rect_in_circle, distance
+from ex_15_9_1 import Point, Rectangle, Circle, rect_in_circle, distance, rect_circle_overlap, Vector
 
 class TestGeometry(unittest.TestCase):
 
@@ -52,6 +52,45 @@ class TestGeometry(unittest.TestCase):
                 distance(p1, p2, xy), half_hypoteneuse
             )
         )
+
+    @unittest.SkipTest
+    def test_rect_circle_overlap(self):
+        """ Test some expected values for this overlap function"""
+        c = Circle(Point(), 5)
+        r = Rectangle(Point(0, 5), 1, 1)
+
+        self.assertTrue(rect_circle_overlap(c, r))
+
+        r.bl = Point(4,3)
+        self.assertTrue(rect_circle_overlap(c, r))
+
+        r.bl = Point(3.75, 3.75)
+        self.assertFalse(rect_circle_overlap(c, r))
+
+
+    def test_vector_dot_product(self):
+        """ Test vector dot product implementaiton from https://www.geeksforgeeks.org/minimum-distance-from-a-point-to-the-line-segment-using-vectors/"""
+        a = Point(0, 0)
+        b = Point(2, 0)
+        e = Point(4, 0)
+
+        ab = Vector(a, b)
+        be = Vector(b, e)
+        ae = Vector(a, e)
+
+        self.assertTrue(ab.dot_product(be) == 4)
+        self.assertTrue(ab.dot_product(ae) == 8)
+
+    def test_vector_shortest_distance(self):
+        a = Point(0, 0)
+        b = Point(2, 0)
+        e = Point(4, 0)
+
+        ab = Vector(a, b)
+        be = Vector(b, e)
+        ae = Vector(a, e)
+
+        self.assertTrue(ab.shortest_distance(e) == 2)
         
 if __name__ == '__main__':
     unittest.main()

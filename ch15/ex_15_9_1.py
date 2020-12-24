@@ -25,6 +25,7 @@ Solution: http://thinkpython2.com/code/Circle.py.
 
 """
 import math
+import pdb
 
 class Point:
     """ ordered pair"""
@@ -36,8 +37,29 @@ class Point:
         """ Returns distance to other point"""
         return math.sqrt((self.x - other.x)**2 + (self.y - other.y)**2)
 
+class Vector:
+    """ Distance & magnitude """
+    def __init__(self, pointA=Point(), pointB = Point(1,1)):
+        self.pointA = pointA
+        self.pointB = pointB
+        self.x = pointB.x - pointA.x
+        self.y = pointB.y - pointA.y
 
-   
+    def dot_product(self, other):
+        """ Return scalar dot product of this vector with another vector"""
+        return self.x * other.x + self.y * other.y
+
+    def shortest_distance(self, pointE):
+        """ Returns shortest distance from this vector (self) to point. 
+        Based on https://www.geeksforgeeks.org/minimum-distance-from-a-point-to-the-line-segment-using-vectors/ """
+        be = Vector(self.pointB, pointE)
+        ae = Vector(self.pointA, pointE)
+
+        if self.dot_product(be) > 0: return self.pointB.distance(pointE)
+        if self.dot_product(ae) < 0: return self.pointA.distance(pointE)
+        else: return distance(self.pointA, self.pointB, pointE)
+        
+        
 class Circle:
     """ Has a radius and centre"""
     def __init__(self, centre = Point(0,0), radius=1):
@@ -94,7 +116,14 @@ def rect_circle_overlap(circ, rect):
     https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line"""
     vl = rect.vertices()
     
-#    for a in range(len(vl)):
+    for a in range(len(vl)):
+        p1 = vl[a]
+        p2 = vl[(a + 1) % len(vl)]
+        d = distance(p1, p2, circ.centre)
+        if math.isclose(d, circ.radius) | circ.radius >= d:
+            return True
+
+    return False
         
 
 
@@ -117,3 +146,5 @@ if __name__ == '__main__':
     print(f'(150, 225) in c: {point_in_circle(c, point_on_c)}')
     
     r = Rectangle(Point(0, 0), 100, 100)
+
+    v1 = Vector(Point(), Point(1,1))
