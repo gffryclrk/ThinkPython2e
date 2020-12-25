@@ -3,7 +3,7 @@ import math
 import unittest
 import sys
 sys.path.append('ch15/')
-from ex_15_9_1 import Point, Rectangle, Circle, rect_in_circle, distance, rect_circle_overlap, Vector
+from ex_15_9_1 import Point, Rectangle, Circle, rect_in_circle, distance, rect_circle_overlap, LineSegment, Line
 
 class TestGeometry(unittest.TestCase):
 
@@ -53,6 +53,18 @@ class TestGeometry(unittest.TestCase):
             )
         )
 
+    def test_line_distance(self):
+        """ Test Line object distance method """
+        l = Line(Point(0,0), Point(1,1))
+        xy = Point(0, 2.5)
+        
+        half_hypoteneuse = math.sqrt((2.5 ** 2) + (2.5) ** 2) / 2
+        self.assertTrue(
+            math.isclose(
+                l.distance(xy), half_hypoteneuse
+                )
+            )
+        
     @unittest.SkipTest
     def test_rect_circle_overlap(self):
         """ Test some expected values for this overlap function"""
@@ -68,27 +80,27 @@ class TestGeometry(unittest.TestCase):
         self.assertFalse(rect_circle_overlap(c, r))
 
 
-    def test_vector_dot_product(self):
+    def test_line_segment_dot_product(self):
         """ Test vector dot product implementaiton from https://www.geeksforgeeks.org/minimum-distance-from-a-point-to-the-line-segment-using-vectors/"""
         a = Point(0, 0)
         b = Point(2, 0)
         e = Point(4, 0)
 
-        ab = Vector(a, b)
-        be = Vector(b, e)
-        ae = Vector(a, e)
+        ab = LineSegment(a, b)
+        be = LineSegment(b, e)
+        ae = LineSegment(a, e)
 
         self.assertTrue(ab.dot_product(be) == 4)
         self.assertTrue(ab.dot_product(ae) == 8)
 
-    def test_vector_shortest_distance(self):
+    def test_line_segment_shortest_distance(self):
         a = Point(0, 0)
         b = Point(2, 0)
         e = Point(4, 0)
 
-        ab = Vector(a, b)
-        be = Vector(b, e)
-        ae = Vector(a, e)
+        ab = LineSegment(a, b)
+        be = LineSegment(b, e)
+        ae = LineSegment(a, e)
 
         self.assertTrue(ab.shortest_distance(e) == 2)
         

@@ -37,7 +37,7 @@ class Point:
         """ Returns distance to other point"""
         return math.sqrt((self.x - other.x)**2 + (self.y - other.y)**2)
 
-class Vector:
+class LineSegment:
     """ Distance & magnitude """
     def __init__(self, pointA=Point(), pointB = Point(1,1)):
         self.pointA = pointA
@@ -52,13 +52,31 @@ class Vector:
     def shortest_distance(self, pointE):
         """ Returns shortest distance from this vector (self) to point. 
         Based on https://www.geeksforgeeks.org/minimum-distance-from-a-point-to-the-line-segment-using-vectors/ """
-        be = Vector(self.pointB, pointE)
-        ae = Vector(self.pointA, pointE)
+        be = LineSegment(self.pointB, pointE)
+        ae = LineSegment(self.pointA, pointE)
 
         if self.dot_product(be) > 0: return self.pointB.distance(pointE)
         if self.dot_product(ae) < 0: return self.pointA.distance(pointE)
         else: return distance(self.pointA, self.pointB, pointE)
-        
+
+class Line:
+    """ Continues infintely in two directions. Currently defined by two points """
+    def __init__(self, pointA = Point(), pointB = Point(1,1)):
+        self.pointA = pointA
+        self.pointB = pointB
+
+    def distance(self, other_point):
+        """ Returns shortest distance to point """
+        """ Formula from wikipedia: https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line"""
+        return (
+            abs(
+              (self.pointB.x - self.pointA.x) * (self.pointA.y - other_point.y) - (self.pointA.x - other_point.x) * (self.pointB.y - self.pointA.y)
+        ) / (
+            math.sqrt(
+                ((self.pointB.x - self.pointA.x)**2 + ((self.pointB.y - self.pointA.y)**2))
+            ))
+        )
+    
         
 class Circle:
     """ Has a radius and centre"""
@@ -147,4 +165,4 @@ if __name__ == '__main__':
     
     r = Rectangle(Point(0, 0), 100, 100)
 
-    v1 = Vector(Point(), Point(1,1))
+    v1 = LineSegment(Point(), Point(1,1))
