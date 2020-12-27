@@ -49,7 +49,7 @@ class LineSegment:
         """ Return scalar dot product of this vector with another vector"""
         return self.x * other.x + self.y * other.y
 
-    def shortest_distance(self, pointE):
+    def distance(self, pointE):
         """ Returns shortest distance from this vector (self) to point. 
         Based on https://www.geeksforgeeks.org/minimum-distance-from-a-point-to-the-line-segment-using-vectors/ """
         be = LineSegment(self.pointB, pointE)
@@ -126,16 +126,12 @@ def rect_circle_overlap(circ, rect):
     for a in range(len(vl)):
         p1 = vl[a]
         p2 = vl[(a + 1) % len(vl)]
-        d = distance(p1, p2, circ.centre)
+        d = LineSegment(p1, p2).distance(circ.centre)
         if math.isclose(d, circ.radius) | circ.radius >= d:
             return True
 
     return False
         
-
-
-    
-    
 if __name__ == '__main__':
     c = Circle()
     c.centre = Point() 

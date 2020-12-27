@@ -58,8 +58,6 @@ class TestGeometry(unittest.TestCase):
                 )
             )
                 
-        
-    @unittest.SkipTest
     def test_rect_circle_overlap(self):
         """ Test some expected values for this overlap function"""
         c = Circle(Point(), 5)
@@ -72,6 +70,9 @@ class TestGeometry(unittest.TestCase):
 
         r.bl = Point(3.75, 3.75)
         self.assertFalse(rect_circle_overlap(c, r))
+
+        r.bl = Point(5, -0.5)
+        self.assertTrue(rect_circle_overlap(c, r))
 
 
     def test_line_segment_dot_product(self):
@@ -96,7 +97,7 @@ class TestGeometry(unittest.TestCase):
         be = LineSegment(b, e)
         ae = LineSegment(a, e)
 
-        self.assertTrue(ab.shortest_distance(e) == 2)
+        self.assertTrue(ab.distance(e) == 2)
 
         b = Point(2, 2)
         e = Point(2, 0)
@@ -109,7 +110,7 @@ class TestGeometry(unittest.TestCase):
         
         self.assertTrue(
             math.isclose(
-                ab.shortest_distance(e), d
+                ab.distance(e), d
                 )
             )
 
