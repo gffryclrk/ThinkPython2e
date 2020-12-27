@@ -3,7 +3,7 @@ import math
 import unittest
 import sys
 sys.path.append('ch15/')
-from ex_15_9_1 import Point, Rectangle, Circle, rect_in_circle, distance, rect_circle_overlap, LineSegment, Line
+from ex_15_9_1 import Point, Rectangle, Circle, rect_in_circle, rect_circle_overlap, LineSegment, Line
 
 class TestGeometry(unittest.TestCase):
 
@@ -38,32 +38,26 @@ class TestGeometry(unittest.TestCase):
         
         
 
-    def test_distance(self):
-        """ Test distance from point to line using known values"""
-        p1 = Point(0,0)
-        p2 = Point(1,1)
-        xy = Point(0,2.5)
-
-        half_hypoteneuse = math.sqrt((2.5 ** 2) + (2.5) ** 2) / 2
-
-        # Using math.isclose because of precision with floats
-        self.assertTrue(
-            math.isclose(
-                distance(p1, p2, xy), half_hypoteneuse
-            )
-        )
-
     def test_line_distance(self):
         """ Test Line object distance method """
         l = Line(Point(0,0), Point(1,1))
         xy = Point(0, 2.5)
         
-        half_hypoteneuse = math.sqrt((2.5 ** 2) + (2.5) ** 2) / 2
+        half_hypoteneuse = math.sqrt((2.5 ** 2) + (2.5 ** 2)) / 2
         self.assertTrue(
             math.isclose(
                 l.distance(xy), half_hypoteneuse
                 )
             )
+
+        xy = Point(0, 2)
+        d = 2 * math.sin( math.pi / 4 )
+        self.assertTrue(
+            math.isclose(
+                l.distance(xy), d
+                )
+            )
+                
         
     @unittest.SkipTest
     def test_rect_circle_overlap(self):
@@ -103,6 +97,21 @@ class TestGeometry(unittest.TestCase):
         ae = LineSegment(a, e)
 
         self.assertTrue(ab.shortest_distance(e) == 2)
+
+        b = Point(2, 2)
+        e = Point(2, 0)
+
+        ab = LineSegment(a, b)
+        be = LineSegment(b, e)
+        ae = LineSegment(a, e)
+
+        d = 2 * math.sin( math.pi / 4 )
         
+        self.assertTrue(
+            math.isclose(
+                ab.shortest_distance(e), d
+                )
+            )
+
 if __name__ == '__main__':
     unittest.main()

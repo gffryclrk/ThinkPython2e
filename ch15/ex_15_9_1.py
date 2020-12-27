@@ -57,7 +57,7 @@ class LineSegment:
 
         if self.dot_product(be) > 0: return self.pointB.distance(pointE)
         if self.dot_product(ae) < 0: return self.pointA.distance(pointE)
-        else: return distance(self.pointA, self.pointB, pointE)
+        else: return Line(self.pointA, self.pointB).distance(pointE)
 
 class Line:
     """ Continues infintely in two directions. Currently defined by two points """
@@ -116,17 +116,6 @@ def rect_in_circle(circ, rect):
             return False
 
     return True
-
-def distance(p1, p2, xy):
-    """p1 & p2 are points on the same line. xy is a third point which the distance to the line containing points p1 & p2 is is being calculated and returned
-    https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line"""
-    numer = abs(
-        (p2.x - p1.x)*(p1.y-xy.y)-(p1.x-xy.x)*(p2.y-p1.y)
-        )
-    denom = math.sqrt(
-        (((p2.x-p1.x)**2) + ((p2.y-p1.y)**2))
-         )
-    return (numer / denom)
 
 
 def rect_circle_overlap(circ, rect):
