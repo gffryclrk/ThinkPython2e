@@ -54,6 +54,23 @@ class TestTime(unittest.TestCase):
         assert(i.second == (t.second + more_seconds) % 60)
         
 
+    def test_int_to_time_time_to_int(self):
+        """(from text) You might have to think a bit, and run some tests, to
+convince yourself that these functions are correct. One way to test
+them is to check that time_to_int(int_to_time(x)) == x for many values
+of x. This is an example of a consistency check."""
+
+        x = 100
+        assert(time_to_int(int_to_time(x)) == x)
+
+        x = 1000
+        assert(time_to_int(int_to_time(x)) == x)
+
+        x = 99
+        assert(time_to_int(int_to_time(x)) == x)
+
+        x = 0
+        assert(time_to_int(int_to_time(x)) == x)
         
 
 if __name__ == '__main__':
