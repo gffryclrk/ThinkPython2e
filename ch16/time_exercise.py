@@ -10,6 +10,7 @@ def valid_time(time):
         return False
     if time.minute >= 60 or time.second >= 60:
         return False
+    return True
     
 def time_to_int(time):
     minutes = time.hour * 60 + time.minute
@@ -28,8 +29,16 @@ def print_time(time):
     print(f'{time.hour}:{time.minute}:{time.second}')
 
 def add_time(t1, t2):
-    assert valid_time(t1) and valid_time(2)
+    assert valid_time(t1) and valid_time(t2)
     seconds = time_to_int(t1) + time_to_int(t2)
+    return int_to_time(seconds)
+
+def mul_time(t1, multiplier):
+    """Write a function called mul_time that takes a Time object and a
+number and returns a new Time object that contains the product of the
+original Time and the number."""
+    assert valid_time(t1)
+    seconds = time_to_int(t1) * multiplier
     return int_to_time(seconds)
 
 def increment(time, seconds):

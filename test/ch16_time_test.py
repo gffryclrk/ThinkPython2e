@@ -71,6 +71,18 @@ of x. This is an example of a consistency check."""
 
         x = 0
         assert(time_to_int(int_to_time(x)) == x)
+
+    def test_mul_time(self):
+        t = self.t
+
+        assert(
+            time_to_int(
+                add_time(t, t)
+                ) ==
+            time_to_int(
+                mul_time(t, 2)
+                )
+            )
         
 
 if __name__ == '__main__':
