@@ -85,5 +85,17 @@ of x. This is an example of a consistency check."""
             )
         
 
+    def test_time_per_distance(self):
+        """ Test time_per_distance function """
+        t = Time()
+        t.hour = 10
+
+        d = 2
+
+        tpd = time_per_distance(t, d)
+        assert(tpd.hour == 5)
+        assert(tpd.minute == 0)
+        assert(tpd.second == 0)
+        
 if __name__ == '__main__':
     unittest.main()

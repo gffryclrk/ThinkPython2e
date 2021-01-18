@@ -4,6 +4,10 @@ class Time:
     """ Represents the time of day.
     attributes: hour, minute, second
     """
+    def __init__(self):
+        self.hour = 0
+        self.minute = 0
+        self.second = 0
 
 def valid_time(time):
     if time.hour < 0 or time.minute < 0 or time.second < 0:
@@ -44,6 +48,21 @@ original Time and the number."""
 def increment(time, seconds):
     """As an exercise, write a “pure” version of increment that creates
 and returns a new Time object rather than modifying the parameter. """
-
     
     return int_to_time(time_to_int(time) + seconds)
+
+
+def time_per_distance(t, distance):
+    """ Chapter 16.7 Exercise 1: Uses mul_time to return average time per distance
+
+    Args:
+        t: time
+        distance: distance travelled
+
+    Returns:
+        Time object of average distance travelled (time per mile)
+    """
+
+    seconds = time_to_int(t)
+    seconds_per_distance = seconds / distance
+    return int_to_time(seconds_per_distance)
