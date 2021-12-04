@@ -99,6 +99,7 @@ of x. This is an example of a consistency check."""
         assert(tpd.second == 0)
 
     @patch('builtins.print')
+    @freeze_time('2021-12-04')
     def test_print_day_of_week(self, mock_print):
         print_day_of_week()
         mock_print.assert_called_with('Saturday')
