@@ -4,8 +4,9 @@ Chapter 16 """
 import unittest
 from unittest.mock import patch, call
 import sys
-sys.path.append('ch16/')
+sys.path.append('../ch16/')
 from time_exercise import *
+from freezegun import freeze_time
 import pdb
 
 class TestTime(unittest.TestCase):
@@ -96,6 +97,11 @@ of x. This is an example of a consistency check."""
         assert(tpd.hour == 5)
         assert(tpd.minute == 0)
         assert(tpd.second == 0)
+
+    @patch('builtins.print')
+    def test_print_day_of_week(self, mock_print):
+        print_day_of_week()
+        mock_print.assert_called_with('Saturday')
         
 if __name__ == '__main__':
     unittest.main()

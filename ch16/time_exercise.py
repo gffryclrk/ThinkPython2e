@@ -1,4 +1,6 @@
 """Think Python, 2nd Ed."""
+import calendar
+from datetime import datetime
 
 class Time:
     """ Represents the time of day.
@@ -38,9 +40,11 @@ def add_time(t1, t2):
     return int_to_time(seconds)
 
 def mul_time(t1, multiplier):
-    """Write a function called mul_time that takes a Time object and a
-number and returns a new Time object that contains the product of the
-original Time and the number."""
+    """ Chapter 16.7 Exercise 6
+    Write a function called mul_time that takes a Time object and a
+    number and returns a new Time object that contains the product of the
+    original Time and the number."""
+    
     assert valid_time(t1)
     seconds = time_to_int(t1) * multiplier
     return int_to_time(seconds)
@@ -53,7 +57,8 @@ and returns a new Time object rather than modifying the parameter. """
 
 
 def time_per_distance(t, distance):
-    """ Chapter 16.7 Exercise 1: Uses mul_time to return average time per distance
+    """ Chapter 16.7 Exercise 6: 
+    Uses mul_time to return average time per distance
 
     Args:
         t: time
@@ -66,3 +71,12 @@ def time_per_distance(t, distance):
     seconds = time_to_int(t)
     seconds_per_distance = seconds / distance
     return int_to_time(seconds_per_distance)
+
+def print_day_of_week():
+    """Chapter 16.7 Exercise 1 Use the datetime module to write a program
+    that gets the current date and prints the day of the week."""
+    
+    today = datetime.now()
+    day_of_week = calendar.weekday(today.year, today.month, today.day)
+    name_of_today = calendar.day_name[day_of_week]
+    print(name_of_today)
