@@ -4,8 +4,10 @@ Chapter 16 """
 import unittest
 from unittest.mock import patch, call
 import sys
-sys.path.append('../ch16/')
+sys.path.append('./ch16/')
 from time_exercise import *
+
+import datetime
 from freezegun import freeze_time
 import pdb
 
@@ -104,5 +106,17 @@ of x. This is an example of a consistency check."""
         print_day_of_week()
         mock_print.assert_called_with('Saturday')
         
+    @freeze_time('2021-12-25')
+    def test_time_until_next_bday(self):
+        """ Return expected datetime.timedelta """
+
+        bday = datetime.date(2000,2,14)
+        countdown = time_until_next_bday(bday)
+
+        self.assertEquals(
+                countdown,
+                datetime.timedelta(days=52)
+                )
+
 if __name__ == '__main__':
     unittest.main()

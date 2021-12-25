@@ -1,6 +1,6 @@
 """Think Python, 2nd Ed."""
 import calendar
-from datetime import datetime
+from datetime import *
 
 class Time:
     """ Represents the time of day.
@@ -80,3 +80,25 @@ def print_day_of_week():
     day_of_week = calendar.weekday(today.year, today.month, today.day)
     name_of_today = calendar.day_name[day_of_week]
     print(name_of_today)
+
+def time_until_next_bday(bday):
+    """Chapter 16.7
+    Exercise 7.2
+    Write a program that takes a birthday as input and prints the user’s age and the number of days, hours, minutes and seconds until their next birthday.
+
+    Notes:
+    - I'm not going to print it but return it instead
+    - This exercise is pretty much solved in the datetime.date documentation: https://docs.python.org/3/library/datetime.html
+
+    Parameters
+    ----------
+    bday: datetime.date
+        Date of birth
+
+    Returns
+    ----------
+    time_until_bday: number of days until next bday
+        datetime.timedelta
+    """
+
+    return timedelta(days=0)
