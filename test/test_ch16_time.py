@@ -1,11 +1,11 @@
 """Testing exercise solutions to Think Python, 2nd Ed
 Chapter 16 """
-
 import unittest
 from unittest.mock import patch, call
-import sys
-sys.path.append('./ch16/')
-from time_exercise import *
+# import sys
+# sys.path.append('./ch16/')
+from ch16.time_exercise import *
+# from ch16.time_exercise import Time
 
 import datetime
 from freezegun import freeze_time
