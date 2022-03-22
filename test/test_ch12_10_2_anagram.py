@@ -7,9 +7,9 @@ https://stackoverflow.com/questions/273192/how-can-i-safely-create-a-nested-dire
 """
 
 import unittest
-import sys
-sys.path.append('ch12/')
-import ex12_10_2_redo as ag
+# import sys
+# sys.path.append('ch12/')
+from ch12 import ex12_10_2_redo as ag
 from pathlib import Path
 import timeit
 
