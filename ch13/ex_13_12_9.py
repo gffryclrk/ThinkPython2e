@@ -32,10 +32,11 @@ def build_freq_dict(path):
     """
 
     freq_dict = {}
-    for line in open(path):
-        for word in line.strip().split():
-            count = freq_dict.get(word, 0) + 1
-            freq_dict[word] = count
+    with open(path, 'r') as f:
+        for line in f:
+            for word in line.strip().split():
+                count = freq_dict.get(word, 0) + 1
+                freq_dict[word] = count
 
     return freq_dict
 
