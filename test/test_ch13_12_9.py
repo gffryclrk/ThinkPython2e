@@ -10,15 +10,15 @@ from ch13 import ex_13_12_9 as zipf
 class TestZipfAnalysis(unittest.TestCase):
 
     def setUp(self):
-        self.emma_frequencies = zipf.build_freq_dict('text/emma.txt')
+        self.haiku_frequencies = zipf.build_freq_dict('text/test_haiku.txt')
 
-    def test_emma_freqs_greater_than_zero(self):
+    def test_haiku_freqs_greater_than_zero(self):
         """
-        Test that the Emma dictionary was loaded
+        Test that the haiku dictionary was loaded
         """
 
-        print(f"Emma Frequencies Dictionary length: {len(self.emma_frequencies)}")
-        self.assertTrue(len(self.emma_frequencies) > 0)
+        print(f"Haiku Frequencies Dictionary length: {len(self.haiku_frequencies)}")
+        self.assertTrue(len(self.haiku_frequencies) > 0)
 
         
 if __name__ == '__main__':
