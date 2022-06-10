@@ -107,15 +107,27 @@ of x. This is an example of a consistency check."""
         mock_print.assert_called_with('Saturday')
         
     @freeze_time('2021-12-25')
-    def test_time_until_next_bday(self):
-        """ Return expected datetime.timedelta """
+    def test_time_until_next_bday_next_year(self):
+        """ Return expected datetime.timedelta when bday this year is past"""
 
         bday = datetime.date(2000,2,14)
         countdown = time_until_next_bday(bday)
 
-        self.assertEquals(
+        self.assertEqual(
                 countdown,
-                datetime.timedelta(days=52)
+                datetime.timedelta(days=51)
+                )
+
+    @freeze_time('2021-01-20')
+    def test_time_until_next_bday_this_year(self):
+        """ Return expected datetime.timedelta when bday this year is not past"""
+
+        bday = datetime.date(2000,2,14)
+        countdown = time_until_next_bday(bday)
+
+        self.assertEqual(
+                countdown,
+                datetime.timedelta(days=25)
                 )
 
 if __name__ == '__main__':

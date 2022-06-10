@@ -1,6 +1,8 @@
 """Think Python, 2nd Ed."""
 import calendar
-from datetime import *
+from datetime import datetime, date
+#import datetime
+import pdb
 
 class Time:
     """ Represents the time of day.
@@ -101,4 +103,11 @@ def time_until_next_bday(bday):
         datetime.timedelta
     """
 
-    return timedelta(days=0)
+    today = date.today()
+    bday_this_year = date(today.year, bday.month, bday.day)
+
+    next_bday = bday_this_year.replace(year = today.year + 1)\
+            if bday_this_year < today\
+            else bday_this_year
+
+    return abs(next_bday - today)
