@@ -10,7 +10,7 @@ class TestChooseNWords(unittest.TestCase):
         self.parse_dict = markov.build_dict(gen)
         self.od = markov.build_organized_dict(self.parse_dict)
 
-    def testOrderedDict(self):
+    def test_ordered_dict(self):
         """
         re-run generator and ensure every prefix is in dict
         """
@@ -21,7 +21,7 @@ class TestChooseNWords(unittest.TestCase):
             
 #        self.assertTrue(len(self.od) == 137448)
 
-    def testChoose_I_shall_press(self):
+    def test_choose_I_shall_press(self):
         """
         Test that words are able to be generated on known positive case
         """
@@ -30,7 +30,7 @@ class TestChooseNWords(unittest.TestCase):
         choose_words = markov.choose_n_words(self.od, prefix, num_words)
         self.assertTrue(len(choose_words) == (num_words + len(prefix)))
 
-    def testLoadMultipleBooks(self):
+    def test_load_multiple_books(self):
         """
         Test load multiple books into pre-generated dictionary
         """
