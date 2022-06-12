@@ -1,11 +1,14 @@
 """Testing exercise solutions to Think Python, 2nd Ed
 Chapter 16 """
-
 import unittest
 from unittest.mock import patch, call
-import sys
-sys.path.append('ch16/')
-from time_exercise import *
+# import sys
+# sys.path.append('./ch16/')
+from ch16.time_exercise import *
+# from ch16.time_exercise import Time
+
+import datetime
+from freezegun import freeze_time
 import pdb
 
 class TestTime(unittest.TestCase):
@@ -96,6 +99,36 @@ of x. This is an example of a consistency check."""
         assert(tpd.hour == 5)
         assert(tpd.minute == 0)
         assert(tpd.second == 0)
+
+    @patch('builtins.print')
+    @freeze_time('2021-12-04')
+    def test_print_day_of_week(self, mock_print):
+        print_day_of_week()
+        mock_print.assert_called_with('Saturday')
         
+    @freeze_time('2021-12-25')
+    def test_time_until_next_bday_next_year(self):
+        """ Return expected datetime.timedelta when bday this year is past"""
+
+        bday = datetime.date(2000,2,14)
+        countdown = time_until_next_bday(bday)
+
+        self.assertEqual(
+                countdown,
+                datetime.timedelta(days=51)
+                )
+
+    @freeze_time('2021-01-20')
+    def test_time_until_next_bday_this_year(self):
+        """ Return expected datetime.timedelta when bday this year is not past"""
+
+        bday = datetime.date(2000,2,14)
+        countdown = time_until_next_bday(bday)
+
+        self.assertEqual(
+                countdown,
+                datetime.timedelta(days=25)
+                )
+
 if __name__ == '__main__':
     unittest.main()

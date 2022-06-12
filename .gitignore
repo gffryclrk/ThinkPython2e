@@ -6,6 +6,7 @@ ch11/search/*
 *.py~
 ENV/*
 env3/*
+venv/*
 TAGS
 solutions/*
 tmp/*
