@@ -23,5 +23,16 @@ class TestObjectOrientedPoint(unittest.TestCase):
         self.assertEqual(self.p.__str__(), '(0, 0)')
         # TODO: Look up how to patch this test to test print without actually printing
 
+    def test_point_add_method(self):
+        """ Exercise 17.4. Write an add method for the Point class. """
+
+        p2 = Point(1,1)
+
+        # TODO: Look up a way to overload equals and use equality to check expected return instead
+        self.assertEqual((self.p + p2).x, 1) 
+        self.assertEqual((self.p + p2).y, 1)
+        
+
+
 if __name__ == '__main__':
     unittest.main()
