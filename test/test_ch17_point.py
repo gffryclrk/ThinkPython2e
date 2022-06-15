@@ -36,6 +36,21 @@ class TestObjectOrientedPoint(unittest.TestCase):
         self.assertEqual(self.p + p2, Point(1,1))
         
 
+    def test_point_radd_tuple(self):
+
+        """ Exercise 17.5 Test: adding a Point and Tuple """
+
+        self.assertEqual(
+            Point(0,0) + (1,1),
+            (1,1) + Point(0,0),
+            msg="Positive radd case"
+        )
+
+        self.assertNotEqual(
+            Point(0,0) + (1,1),
+            Point(1,2),
+            msg="Negative radd case"
+        )
 
 if __name__ == '__main__':
     unittest.main()
