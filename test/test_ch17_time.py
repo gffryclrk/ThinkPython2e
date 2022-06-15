@@ -1,4 +1,4 @@
-"""Testing exercise solutions to Think Python, 2nd Ed
+"""Testing Time exercise solutions to Think Python, 2nd Ed
 Chapter 17 """
 import unittest
 from ch17.time_exercise import Time
