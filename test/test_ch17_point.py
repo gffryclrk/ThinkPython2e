@@ -18,5 +18,10 @@ class TestObjectOrientedPoint(unittest.TestCase):
         self.assertEqual(
             self.p.y, 0)
 
+    def test_point_str_method(self):
+        """Exercise 17.3. Write a str method for the Point class. Create a Point object and print it"""
+        self.assertEqual(self.p.__str__(), '(0, 0)')
+        # TODO: Look up how to patch this test to test print without actually printing
+
 if __name__ == '__main__':
     unittest.main()
