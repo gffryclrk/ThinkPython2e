@@ -111,3 +111,55 @@ def time_until_next_bday(bday):
             else bday_this_year
 
     return abs(next_bday - today)
+
+def get_double_day(bday1, bday2):
+    """Chapter 16.7
+    Exercise 7.3
+    For two people born on different days, there is a day when one is twice as old as the other.
+    That’s their Double Day. Write a program that takes two birthdays and computes their Double
+    Day
+    
+    Parameters
+    ----------
+    bday1: datetime.date  # TODO: Fix these inconsistent docstrings (see above also, ch 7.2 also
+        Day of birth 1
+
+    bday2: datetime.date 
+        Day of birth 2
+    
+    Returns
+    ----------
+    double_day: datetime.date
+        Day of double day
+
+    """
+
+    return get_n_times_older(bday1, bday2, 2)
+
+
+def get_n_times_older(bday1, bday2, n):
+    """Chapter 16.7
+    Exercise 7.4
+    
+    For a little more challenge, write the more general version [of 7.3] that computes the day when one person is n times older than the other.
+
+    Parameters
+    ----------
+    bday1: datetime.date  # TODO: Fix these inconsistent docstrings 
+        Day of birth 1
+
+    bday2: datetime.date 
+        Day of birth 2
+    
+    Returns
+    ----------
+    double_day: datetime.date
+        Day of double day
+    """
+
+    if bday1 == bday2:
+        raise ValueError("Both bdays are the same, this doesn't make sense!")
+
+    ordered_bdays = sorted([bday1, bday2])
+
+    return ordered_bdays[0] + n * (ordered_bdays[1] - ordered_bdays[0])

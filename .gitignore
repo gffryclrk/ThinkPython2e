@@ -12,3 +12,5 @@ solutions/*
 tmp/*
 \#*#
 .\#*
+
+*.~undo-tree~

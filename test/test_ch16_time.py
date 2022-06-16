@@ -130,5 +130,27 @@ of x. This is an example of a consistency check."""
                 datetime.timedelta(days=25)
                 )
 
+    def test_double_day_legal_values(self):
+        """ Test double day with expected input"""
+
+        bday1 = date(year=2000, month=1, day=1)
+        bday2 = date(year=2010, month=1, day=1)
+
+        self.assertEqual(
+            get_double_day(bday1, bday2),
+            datetime.date(2020, 1, 2)
+            )
+    
+    @unittest.expectedFailure
+    def test_double_day_illegal_values(self):
+        """ A test that should fail because you can't have a double day with two people born on the same day (I don't think...) """
+
+        bday1 = date(year=2000, month=1, day=1)
+        self.assertEqual(
+            get_double_day(bday1, bday1),
+            datetime.date(2020, 1, 2)
+            )
+
+
 if __name__ == '__main__':
     unittest.main()
