@@ -13,8 +13,15 @@
 class Kangaroo:
     """For test 3 above, see test_add_roo_to_kangas_pouch in ../test/test_ch_17_13_kangaroo.py"""
 
-    def __init__(self):
-       self.pouch_contents = [] 
+    def __init__(self, contents=[]):
+       """In his example the author includes an empty list as a default argument which
+       is a "dangerous-default-value" in python. This is because a mutable default value
+       will keep its mutable state on subsequent method/function calls.
+
+       Thus in the author's example the empty list keeps the contents for both instances of
+       the Kangaroo class. However, since I didn't use a mutable data structure as a default
+       arg I didn't have the same issue."""
+       self.pouch_contents = contents
 
     def put_in_pouch(self, object):
         self.pouch_contents.append(object) 
@@ -26,4 +33,8 @@ if __name__ == '__main__':
     kanga = Kangaroo()
     roo = Kangaroo()
     kanga.put_in_pouch(roo)
+    kanga.put_in_pouch("wallet")
+    print("--kanga contents--")
     print(kanga.pouch_contents)
+    print("--roo contents--")
+    print(roo.pouch_contents)
