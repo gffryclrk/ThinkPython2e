@@ -2,8 +2,6 @@
 Section 13"""
 import unittest
 from ch17.kangaroo import Kangaroo
-import pdb
-
 
 class TestKangaroo(unittest.TestCase):
 
@@ -16,6 +14,5 @@ class TestKangaroo(unittest.TestCase):
     roo, and then adding roo to the contents of kanga’s pouch."""
 
         self.kanga.put_in_pouch(self.roo)
-        pdb.set_trace()
         self.assertNotEqual(self.roo.pouch_contents, self.kanga.pouch_contents)
 
