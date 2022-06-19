@@ -1,5 +1,3 @@
-import pdb
-
 class Time:
     """ Represents the time of day.
     attributes: hour, minute, second
@@ -15,7 +13,15 @@ class Time:
     def __eq__(self, other):
         return self.seconds == other.seconds
 
+    def __lt__(self, other):
+        """(Ch18) As an exercise, write an __lt__ method for Time objects. You
+        can use tuple comparison, but you also might consider comparing
+        integers.
+        """
+        return self.seconds < other.seconds
+
     def time_to_int(self):
+
         """Exercise 17.1. Rewrite time_to_int (from Section 16.4) as a method. 
         Implementation here:
         Returns integer of Time converted to seconds

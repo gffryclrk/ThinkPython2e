@@ -20,6 +20,9 @@ class TestObjectOrientedTime(unittest.TestCase):
 
         self.assertEqual(self.t, Time.int_to_time(3600))
 
+    def test_time_less_than(self):
+        """ Test __lt__ implementation """
+        self.assertLess(self.t, Time(hour=2))
         
 if __name__ == '__main__':
     unittest.main()
