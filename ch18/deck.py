@@ -1,6 +1,7 @@
 """Example code from ThinkPython 2nd Ed"""
 
-from card import Card
+from ch18.card import Card
+import random
 
 class Deck:
 
@@ -15,8 +16,18 @@ class Deck:
     def __str__(self):
         return '\n'.join([str(c) for c in self.cards if c])
 
-if __name__ == '__main__':
+    def pop_card(self):
+        return self.cards.pop()
 
-    d = Deck()
-    print(d)
+    def add_card(self, card):
+        self.cards.append(card)
 
+    def shuffle(self):
+        random.shuffle(self.cards)
+
+    def sort(self):
+        self.cards.sort()
+
+    def move_cards(self, hand, num):
+        for i in range(num):
+            hand.add_card(self.pop_card())
