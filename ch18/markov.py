@@ -32,7 +32,7 @@ def process_file(filename, order=2):
     skip_gutenberg_header(fp)
 
     for line in fp:
-        if line.startswith('*** END OF THIS'): 
+        if line.startswith('End of The Project Gutenberg'):
             break
 
         for word in line.rstrip().split():
@@ -45,7 +45,7 @@ def skip_gutenberg_header(fp):
     fp: open file object
     """
     for line in fp:
-        if line.startswith('*** START OF THIS'):
+        if line.startswith('*END*'):
             break
 
 
