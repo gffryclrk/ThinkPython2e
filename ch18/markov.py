@@ -38,6 +38,7 @@ def process_file(filename, order=2):
         for word in line.rstrip().split():
             process_word(word, order)
 
+    fp.close()
 
 def skip_gutenberg_header(fp):
     """Reads from fp until it finds the line that ends the header.
