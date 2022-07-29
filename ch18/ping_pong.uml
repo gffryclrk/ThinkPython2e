@@ -1,0 +1,8 @@
+@startuml
+
+PingPongParent <|--- Ping
+PingPongParent <|--- Pong
+Ping --> "1" Pong
+Pong --* "*" Ping
+
+@enduml
